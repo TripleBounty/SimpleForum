@@ -1,0 +1,22 @@
+{
+  "name": "simpleforum",
+  "version": "1.0.0",
+  "description": "course project",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TripleBounty/SimpleForum.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TripleBounty/SimpleForum/issues"
+  },
+  "homepage": "https://github.com/TripleBounty/SimpleForum#readme"
+}
