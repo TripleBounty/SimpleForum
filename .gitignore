@@ -197,3 +197,7 @@ FakesAssemblies/
 
 # WebStorm folder
 .idea/
+
+# Custom ignore
+
+./config/MongoDB-config
