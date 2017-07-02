@@ -200,4 +200,4 @@ FakesAssemblies/
 
 # Custom ignore
 
-./config/MongoDB-config
+config/MongoDB-config/
