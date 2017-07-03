@@ -1,10 +1,3 @@
-const app = require('./app/index');
-
-// Start the server
-const port = 3000;
-
-app.listen(port, () => console.log(`Server is running at http://localhost:${port}`));
-
 // MongoClient.connect(dbConfig.connectionString, (err, db) => {
 //     if (err) {
 //         return console.log(err);
