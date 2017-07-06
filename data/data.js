@@ -20,7 +20,7 @@ const db = {
 };
 
 function findUserById(id) {
-    const user = db.users.find((u) => u._id === id);
+    const user = db.users.find((u) => u.id === id);
 
     return Promise.resolve(user || null);
 }

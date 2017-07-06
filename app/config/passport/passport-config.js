@@ -4,7 +4,7 @@ const data = require('../../../data');
 passport.serializeUser((user, done) => {
     // minimalistic example - serialize the user id in the session
     if (user) {
-        done(null, user._id);
+        done(null, user.id);
     }
 });
 
