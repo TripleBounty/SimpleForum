@@ -202,5 +202,6 @@ FakesAssemblies/
 
 # Custom ignore
 
+package-lock.json
 config/MongoDB-config/
 .vscode/
