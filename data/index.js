@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoClient = require('mongodb').mongoClient;
+const mongoClient = require('mongodb').MongoClient;
 const CONNECTION_URL = require('../config/mongo-db-config/index')
     .connectionString;
 
