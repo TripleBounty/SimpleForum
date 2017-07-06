@@ -1,13 +1,14 @@
 const { Router } = require('express');
 
 const attach = (app, data) => {
-    // const homeController = require('../controllers/home-controller');
+    const userController = require('../controllers/user-controller')(data);
+
     const router = new Router();
 
-    router.get('/login', (req, res) => {
-        console.log(data);
-        res.render('home');
-    });
+    router.get('/login', userController.login);
+    app.post('/login', userController.register);
+    app.get('/profile', userController.profile);
+    app.get('/logout', userController.logout);
 
     app.use('/api/users/', router);
 };
