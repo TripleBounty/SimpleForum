@@ -7,3 +7,4 @@ const CONNECTION_URL = require('../config/mongo-db-config/index')
 const connectionPromise = mongoClient.connect(CONNECTION_URL);
 
 module.exports = connectionPromise;
+module.exports = require('./data');
