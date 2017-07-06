@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp server"
+    "start": "./node_modules/.bin/gulp server"
   },
   "repository": {
     "type": "git",
