@@ -1,3 +1,6 @@
+include ../navbars/main-navbar.pug
+include ../footers/main-footer.pug
+
 <!DOCTYPE html>
 html(lang="en")
 head
@@ -10,117 +13,8 @@ head
     link(href='https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css', rel='stylesheet')
     script(src='/libs/jquery/dist/jquery.js')
     script(src='/libs/bootstrap/dist/js/bootstrap.min.js')
-    title Document
+    title Forum
 body
-nav.navbar.navbar-default
-    .container-fluid
-        // Brand and toggle get grouped for better mobile display
-        .navbar-header
-            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#main-menu', aria-expanded='false')
-                span.sr-only Toggle navigation
-                span.icon-bar
-                span.icon-bar
-                span.icon-bar
-        a.navbar-brand(href='/')
-            img(src='/static/img/the-forum-logo.png', alt='')
-        // Collect the nav links, forms, and other content for toggling
-        #main-menu.collapse.navbar-collapse
-            ul.nav.navbar-nav
-                li
-                    a.dropdown-toggle(href='/', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                        span.glyphicon.glyphicon-home(aria-hidden='true')
-                li
-                    a(href='/api/users/register')
-                        | Register User 
-                        span.sr-only (current)
-            ul.nav.navbar-nav.navbar-right
-                li
-                    #search-form.navbar-form(role='search')
-                        .input-group(role='search')
-                            input#quick-serach-input.form-control(data-toggle='popover', data-placement='bottom', type='text', placeholder='Search')
-                            span.input-group-btn
-                                button#quick-serach-button.btn.btn-default
-                                    span.glyphicon.glyphicon-search(aria-hidden='true')
-                li.dropdown
-                    a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                        span.glyphicon.glyphicon-cog(aria-hidden='true')
-                    ul.dropdown-menu
-                        li
-                            a(href='/') Change Password
-                        li
-                            a(href='/') Personal Settings
-                li#log-in
-                    a(href='/api/users/login')
-                        span.glyphicon.glyphicon-log-in(aria-hidden='true')
-                li#user-name-nav
-                    p#nav-username.navbar-text.hidden
-                li#log-out.hidden
-                    a(href='/api/users/logout')
-                        span.glyphicon.glyphicon-log-out(aria-hidden='true')
++main-navbar
 block body
-footer
-    .container
-        .row
-          .col-md-4.col-sm-6.footerleft
-            .logofooter  SimpleForum
-            |         
-            p
-              | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley.
-            |         
-            p
-              i.fa.fa-map-pin
-              |  31, bul. Alexander Malinov - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;110085, SOFIA
-            |         
-            p
-              i.fa.fa-phone
-              |  Phone (Buglaria) : +359 893 32 80 60
-            |         
-            p
-              i.fa.fa-envelope
-              |  E-mail : TripleBounty@gmail.com
-          |       
-          .col-md-2.col-sm-6.paddingtop-bottom
-            h6.heading7 GENERAL LINKS
-            |         
-            ul.footer-ul
-              li
-                a(href='#')  Career
-              |           
-              li
-                a(href='#')  Privacy Policy
-              |           
-              li
-                a(href='#')  Terms &amp; Conditions
-              |           
-              li
-                a(href='#')  Frequently Ask Questions
-          |       
-          .col-md-3.col-sm-6.paddingtop-bottom
-            .fb-page(data-href='https://www.facebook.com/facebook', data-tabs='timeline', data-height='300', data-small-header='false', style='margin-bottom:15px;', data-adapt-container-width='true', data-hide-cover='false', data-show-facepile='true')
-              .fb-xfbml-parse-ignore
-                blockquote(cite='https://www.facebook.com/facebook')
-                  a(href='https://www.facebook.com/telerikacademy') Facebook
-                |             
-                blockquote(cite='https://www.facebook.com/facebook')
-                  a(href='https://github.com/TripleBounty/SimpleForum') GitHub
-    .copyright
-      .container
-        .col-md-6
-          p &copy; 2017 - All Rights protected with DMCA
-        |     
-        .col-md-6
-          ul.bottom_ul
-            li
-              a(href='#') SimpleForum.com
-            |         
-            li
-              a(href='#') About us
-            |         
-            li
-              a(href='#') Faq&apos;s
-            |         
-            li
-              a(href='#') Contact us
-            |         
-            li
-              a(href='#') Site Map
++main-footer
