@@ -1,14 +1,15 @@
 const { Router } = require('express');
 
-const attach = (app) => {
+const attach = (app, data) => {
     // const homeController = require('../controllers/home-controller');
     const router = new Router();
 
-    router.get('/api', (req, res) => {
+    router.get('/login', (req, res) => {
+        console.log(data);
         res.render('home');
     });
 
-    app.use('/', router);
+    app.use('/api/users/', router);
 };
 
 module.exports = attach;
