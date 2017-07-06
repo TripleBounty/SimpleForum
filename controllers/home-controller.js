@@ -1,7 +1,6 @@
-module.exports = () => {
+module.exports = (db) => {
     function getHomePage(req, res) {
-        res.status(200)
-            .send('<h1>Home</h1>');
+        res.status(200).json('home');
     }
 
     return {

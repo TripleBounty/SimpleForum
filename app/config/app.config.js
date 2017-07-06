@@ -3,8 +3,6 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const dbConfig = require('../../config/MongoDB-config');
-const MongoClient = require('mongodb').MongoClient;
 
 const appConfig = (app) => {
     app.set('view engine', 'pug');
