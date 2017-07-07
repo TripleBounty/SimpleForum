@@ -1,0 +1,26 @@
+extends shared/_master
+
+block body
+  .container.login-form
+    .row
+      .col-md-4.col-md-offset-4
+        .panel.panel-default
+          .panel-heading
+            strong Login
+          .panel-body
+            form.form-horizontal(role='form')
+              .form-group
+                label.col-sm-3.control-label(for='inputEmail3') Email
+                .col-sm-9
+                  input#inputEmail3.form-control(type='email', placeholder='Email', required='')
+              .form-group
+                label.col-sm-3.control-label(for='inputPassword3') Password
+                .col-sm-9
+                  input#inputPassword3.form-control(type='password', placeholder='Password', required='')
+              .form-group.last
+                .col-sm-offset-3.col-sm-9
+                  button.btn.btn-success.btn-sm(type='submit') Sign in
+                  button.btn.btn-default.btn-sm(type='reset') Reset
+          .panel-footer
+            | Not Registered? 
+            a(href='#') Register here
