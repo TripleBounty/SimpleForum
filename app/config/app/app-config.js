@@ -1,4 +1,3 @@
-'use strict';
 /* globals __dirname */
 const express = require('express');
 const path = require('path');

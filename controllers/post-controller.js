@@ -1,12 +1,20 @@
-module.exports = (db) => {
+module.exports = (data) => {
     function getPostById(req, res) {
         const id = req.params.postId;
 
-        res.status(200).json(req.db.collection('post').find(id));
+        data.posts.findById(id)
+            .then((post) => {
+                res.render('post', post);
+            });
     }
 
     function getAll(req, res) {
-        res.status(200).json(req.db.collection('post').find({}));
+        data.posts.getAll()
+            .then((posts) => {
+                res.render('home', {
+                    'posts': posts,
+                });
+            });
     }
 
     return {
