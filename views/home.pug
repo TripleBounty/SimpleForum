@@ -1,56 +1,53 @@
 extends shared/_master
 
 block body
-    .container
-        .well
-            .media
-                a.pull-left(href='#')
-                    img.media-object(src='http://placekitten.com/150/150')
-                |   &#x9;&#x9;
-                .media-body
-                    h4.media-heading Receta 1
-                    |           
-                    p.text-right By Francisco
-                    |           
-                    p
-                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
-                    | Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
-                    | dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
-                    | Aliquam in felis sit amet augue.
-                    |           
-            ul.list-inline.list-unstyled
-              li
-                span
-                  i.glyphicon.glyphicon-calendar
-                  |  2 days, 8 hours
-              |             
-              li |
-              |             
-              span
-                i.glyphicon.glyphicon-comment
-                |  2 comments
-              |             
-              li |
-              |             
-              li
-                span.glyphicon.glyphicon-star
-                |                         
-                span.glyphicon.glyphicon-star
-                |                         
-                span.glyphicon.glyphicon-star
-                |                         
-                span.glyphicon.glyphicon-star
-                |                         
-                span.glyphicon.glyphicon-star-empty
-              |             
-              li |
-              |             
-              li
-                span
-                  i.fa.fa-facebook-square
-                |               
-                span
-                  i.fa.fa-twitter-square
-                |               
-                span
-                  i.fa.fa-google-plus-square      
+     each post in posts
+        .container
+            .well
+                .media
+                    a.pull-left(href='#')
+                        img.media-object(src=''+ post.img)
+                    |   &#x9;&#x9;
+                    .media-body
+                        h4.media-heading=post.title
+                        |
+                        p.text-right by 
+                            =post.username
+                        |           
+                        p=post.content        
+                ul.list-inline.list-unstyled
+                  li
+                    span
+                      i.glyphicon.glyphicon-calendar
+                      |  2 days, 8 hours
+                  |             
+                  li |
+                  |             
+                  span
+                    i.glyphicon.glyphicon-comment
+                    |  2 comments
+                  |             
+                  li |
+                  |             
+                  li
+                    span.glyphicon.glyphicon-star
+                    |                         
+                    span.glyphicon.glyphicon-star
+                    |                         
+                    span.glyphicon.glyphicon-star
+                    |                         
+                    span.glyphicon.glyphicon-star
+                    |                         
+                    span.glyphicon.glyphicon-star-empty
+                  |             
+                  li |
+                  |             
+                  li
+                    span
+                      i.fa.fa-facebook-square
+                    |               
+                    span
+                      i.fa.fa-twitter-square
+                    |               
+                    span
+                      i.fa.fa-google-plus-square      
