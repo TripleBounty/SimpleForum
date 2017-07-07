@@ -2,13 +2,7 @@ const passport = require('passport');
 
 module.exports = (data) => {
     function login(req, res) {
-        res.status(200).send(`
-    <form action="/login" method="POST">
-        <input type="text" name="username" placeholder="Username">
-        <input type="text" name="password" placeholder="Password">
-        <input type="submit" value="Login">
-    </form>
-`);
+          res.render('login-form');
     }
 
     function register(req, res, next) {
