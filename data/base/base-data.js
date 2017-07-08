@@ -12,7 +12,7 @@ class BaseData {
 
     findById(id) {
         return this.collection.findOne({
-            id,
+            id: +id,
         });
     }
 

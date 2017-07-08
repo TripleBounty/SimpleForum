@@ -4,7 +4,7 @@ module.exports = (data) => {
 
         data.posts.findById(id)
             .then((post) => {
-                res.render('post', post);
+                res.render('forum-post', { post });
             });
     }
 

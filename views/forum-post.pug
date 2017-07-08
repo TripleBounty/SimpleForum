@@ -1,0 +1,33 @@
+extends shared/_master
+include forum-post-comment.pug
+
+block body
+  .row
+    .col.col-md-12
+      .row
+        .col.col-md-8
+          h4
+            strong 
+              =post.title
+      .row
+        .col.col-md-2
+          a.thumpnail(href='#')
+            img(src=post.img, alt='')
+        .col.col-md-6
+          p
+            =post.content
+      .row
+        .col.col-md-8
+          p
+            i.icon-user
+            |  by 
+            a(href='#') 
+              =post.username
+            |  
+            i.icon-calendar
+            |  July 7th, 2017
+            | 
+            i.icon-comment
+            a(href='#') 3 Comments
+      each comment in post.comments
+          +comment(comment)

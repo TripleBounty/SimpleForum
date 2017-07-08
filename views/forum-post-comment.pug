@@ -1,0 +1,23 @@
+mixin comment(c)
+    .row
+        .col-md-offset-1
+            .row
+                .col.col-md-2
+                p
+                =c.content
+            .row
+                .col.col-md-2
+                p
+                    i.icon-user
+                    |  by 
+                    a(href='#') 
+                        =c.username
+                    |  
+                    i.icon-calendar
+                        =c.date
+                    |         
+                    i.icon-comment
+                    a(href='#') 123
+            .row
+                each nestedComment in c.comments
+                    +comment(nestedComment)

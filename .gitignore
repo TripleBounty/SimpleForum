@@ -203,5 +203,5 @@ FakesAssemblies/
 # Custom ignore
 
 package-lock.json
-config/env-configs/
+app/config/env-configs/
 .vscode/
