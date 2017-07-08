@@ -6,3 +6,16 @@ h1 {
     margin-top: -10px;
     width: 42px;
 }
+.postImg
+{
+    height:200px;
+    width:200px;
+}
+.positiveNodes
+{
+    font-size: 24px;
+}
+.manyNodes
+{
+    color: coral;
+}
