@@ -5,6 +5,7 @@ const attach = (app, data) => {
     const postControler = require('../controllers/forum-post-controller')(data);
 
     router.get('/', postControler.getAll);
+    router.get('/increase-likes/:postId', postControler.updatePostById);
     router.get('/forum-post/:postId', postControler.getPostById);
 
     app.use('/', router);

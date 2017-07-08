@@ -4,7 +4,9 @@ module.exports = (data) => {
 
         data.posts.findById(id)
             .then((post) => {
-                res.render('forum-post', { post });
+                res.render('forum-post', {
+                    post,
+                });
             });
     }
 
@@ -17,8 +19,17 @@ module.exports = (data) => {
             });
     }
 
+    function updatePostById(req, res) {
+        const postId = req.params.postId;
+        data.posts.updateLikes(postId, 1)
+            .then(() => {
+                res.redirect('/');
+            });
+    }
+
     return {
         getPostById,
         getAll,
+        updatePostById,
     };
 };
