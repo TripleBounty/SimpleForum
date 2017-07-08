@@ -203,5 +203,6 @@ FakesAssemblies/
 # Custom ignore
 
 package-lock.json
+yarn.lock
 app/config/env-configs/
 .vscode/

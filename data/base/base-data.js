@@ -17,6 +17,13 @@ class BaseData {
     }
 
     create(model) {
+        if (this._isModelValid) {
+            const error = this._isModelValid(model);
+            if (error !== 'no') {
+                return Promise.reject(error);
+            }
+        }
+
         return this.collection.insert(model);
     }
 

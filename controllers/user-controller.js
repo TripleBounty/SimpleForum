@@ -2,14 +2,19 @@ const passport = require('passport');
 
 module.exports = (data) => {
     function registerForm(req, res) {
-        res.render('register-form');
+        data.countries.getAll()
+            .then((countries) => {
+                res.render('register-form', { countries });
+            });
     }
 
     function register(req, res) {
         data.users.create(req.body)
-            .then((m) => {
-                console.log(m);
+            .then(() => {
                 res.redirect('/');
+            })
+            .catch((error) => {
+                res.render('register-form', { inavalid: error });
             });
     }
 
@@ -18,7 +23,7 @@ module.exports = (data) => {
     }
 
     function signIn(req, res, next) {
-        const auth = passport.authenticate('local', function (error, user) {
+        const auth = passport.authenticate('local', function(error, user) {
             if (error) {
                 next(error);
                 return;
