@@ -1,23 +1,26 @@
 mixin comment(c)
-    .row
-        .col-md-offset-1
-            .row
-                .col.col-md-2
-                p
-                =c.content
-            .row
-                .col.col-md-2
-                p
-                    i.icon-user
-                    |  by 
-                    a(href='#') 
-                        =c.username
-                    |  
-                    i.icon-calendar
-                        =c.date
-                    |         
-                    i.icon-comment
-                    a(href='#') 123
-            .row
-                each nestedComment in c.comments
-                    +comment(nestedComment)
+    .media
+        div.comment-avatar.pull-left
+            img.media-object.user-avatar(src='https://k60.kn3.net/taringa/1/5/8/6/7/6/50/leonrival/200x150_75E.jpg')
+            |
+            .media-body
+                div.comment-box
+                    div.comment-content
+                        =c.content
+                        div.comment-footer
+                            i.icon-user
+                            |  by 
+                            a(href='#') 
+                            =post.username
+                            |  
+                            i.glyphicon.glyphicon-calendar
+                            |  July 7th, 2017
+                            | 
+                            i.glyphicon.glyphicon-comment
+                            | 
+                            =post.comments.length
+                    .row
+                        ul.comments-list.reply-list
+                            each nestedComment in c.comments
+                                li
+                                    +comment(nestedComment)

@@ -2,32 +2,32 @@ extends shared/_master
 include forum-post-comment.pug
 
 block body
-  .row
-    .col.col-md-12
-      .row
-        .col.col-md-8
-          h4
-            strong 
+  .container
+    form.well
+      .media
+        a.pull-left(href='#')
+          img.media-object.user-avatar(src=''+ post.img)
+        |
+        .media-body
+          strong.post-head.media-heading
               =post.title
-      .row
-        .col.col-md-2
-          a.thumpnail(href='#')
-            img(src=post.img, alt='')
-        .col.col-md-6
+          br
           p
             =post.content
-      .row
-        .col.col-md-8
+        .row
           p
             i.icon-user
             |  by 
             a(href='#') 
               =post.username
             |  
-            i.icon-calendar
+            i.glyphicon.glyphicon-calendar
             |  July 7th, 2017
             | 
-            i.icon-comment
-            a(href='#') 3 Comments
-      each comment in post.comments
-          +comment(comment)
+            i.glyphicon.glyphicon-comment
+            | 
+            =post.comments.length
+        ul#comments-list.comments-list
+          each comment in post.comments
+            li
+              +comment(comment)
