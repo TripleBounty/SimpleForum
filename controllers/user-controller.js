@@ -1,12 +1,24 @@
 const passport = require('passport');
 
 module.exports = (data) => {
-    function login(req, res) {
-          res.render('login-form');
+    function registerForm(req, res) {
+        res.render('register-form');
     }
 
-    function register(req, res, next) {
-        const auth = passport.authenticate('local', function(error, user) {
+    function register(req, res) {
+        data.users.create(req.body)
+            .then((m) => {
+                console.log(m);
+                res.redirect('/');
+            });
+    }
+
+    function login(req, res) {
+        res.render('login-form');
+    }
+
+    function signIn(req, res, next) {
+        const auth = passport.authenticate('local', function (error, user) {
             if (error) {
                 next(error);
                 return;
@@ -46,8 +58,10 @@ module.exports = (data) => {
     }
 
     return {
-        login,
         register,
+        registerForm,
+        login,
+        signIn,
         profile,
         logout,
     };

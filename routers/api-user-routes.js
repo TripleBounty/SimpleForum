@@ -6,9 +6,11 @@ const attach = (app, data) => {
     const router = new Router();
 
     router.get('/login', userController.login);
-    app.post('/login', userController.register);
-    app.get('/profile', userController.profile);
-    app.get('/logout', userController.logout);
+    router.post('/login', userController.register);
+    router.get('/register', userController.registerForm);
+    router.post('/register', userController.register);
+    router.get('/profile', userController.profile);
+    router.get('/logout', userController.logout);
 
     app.use('/api/users/', router);
 };
