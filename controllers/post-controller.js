@@ -23,7 +23,7 @@ module.exports = (data) => {
         const postId = req.params.postId;
         data.posts.updateLikes(postId, 1)
             .then(() => {
-                res.redirect('/');
+                //res.redirect('/');
             });
     }
 

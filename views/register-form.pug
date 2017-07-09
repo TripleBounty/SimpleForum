@@ -14,20 +14,28 @@ block body
         br
         // Text input
         .form-group
-          label.col-md-4.control-label First Name
+          label.col-md-4.control-label(for='inputFirstName') First Name
           .col-md-4.inputGroupContainer
             .input-group
               span.input-group-addon
                 i.glyphicon.glyphicon-user
-              input.form-control(name='first_name', placeholder='First Name', type='text')
+              input#inputFirstName.form-control(name='first_name', placeholder='First Name', type='text')
         // Text input
         .form-group
-          label.col-md-4.control-label Last Name
+          label.col-md-4.control-label(for='inputLastName') Last Name
           .col-md-4.inputGroupContainer
             .input-group
               span.input-group-addon
                 i.glyphicon.glyphicon-user
-              input.form-control(name='last_name', placeholder='Last Name', type='text')
+              input#inputLastName.form-control(name='last_name', placeholder='Last Name', type='text')
+        // Text input
+        .form-group
+          label.col-md-4.control-label(for='inputDate') Birth Date
+          .col-md-4.inputGroupContainer
+            .input-group
+              span.input-group-addon
+                i.glyphicon.glyphicon-user
+              input#inputDate.form-control(name='date', placeholder='Birth Date', type='date')
         .form-group
           label.col-md-4.control-label Country
           .col-md-4.selectContainer
@@ -36,47 +44,52 @@ block body
                 i.glyphicon.glyphicon-list
               select.form-control.selectpicker(name='country')
                 option(value='') Country
-                option Bulgaria
+                each country in countries
+                  option #{country.name}
         // Text input
         .form-group
-          label.col-md-4.control-label Username
+          label.col-md-4.control-label(for='inputUserName') Username
           .col-md-4.inputGroupContainer
             .input-group
               span.input-group-addon
                 i.glyphicon.glyphicon-user
-              input.form-control(name='user_name', placeholder='Username', type='text')
+              input#inputUserName.form-control(name='user_name', placeholder='Username', type='text')
         // Text input
         .form-group
-          label.col-md-4.control-label Password
+          label.col-md-4.control-label(for='inputPassword') Password
           .col-md-4.inputGroupContainer
             .input-group
               span.input-group-addon
                 i.glyphicon.glyphicon-user
-              input.form-control(name='user_password', placeholder='Password', type='password')
+              input#inputPassword.form-control(name='user_password', placeholder='Password', type='password')
         // Text input
         .form-group
-          label.col-md-4.control-label Confirm Password
+          label.col-md-4.control-label(for='inputConfirmPassword') Confirm Password
           .col-md-4.inputGroupContainer
             .input-group
               span.input-group-addon
                 i.glyphicon.glyphicon-user
-              input.form-control(name='confirm_password', placeholder='Confirm Password', type='password')
+              input#inputConfirmPassword.form-control(name='confirm_password', placeholder='Confirm Password', type='password')
         // Text input
         .form-group
-          label.col-md-4.control-label E-Mail
+          label.col-md-4.control-label(for='inputEmail') E-Mail
           .col-md-4.inputGroupContainer
             .input-group
               span.input-group-addon
                 i.glyphicon.glyphicon-envelope
-              input.form-control(name='email', placeholder='E-Mail Address', type='text')
+              input#inputEmail.form-control(name='email', placeholder='E-Mail Address', type='text')
         // Text input
         .form-group
-          label.col-md-4.control-label Contact No.
+          label.col-md-4.control-label(for='inputMobile') Contact No.
           .col-md-4.inputGroupContainer
             .input-group
               span.input-group-addon
                 i.glyphicon.glyphicon-earphone
-              input.form-control(name='contact_no', placeholder='(+359)', type='text')
+              input#inputMobile.form-control(name='contact_no', placeholder='(+359)', type='text')
+        if inavalid
+          .form-group
+            label.col-md-6.control-label 
+              =inavalid
         // Button
         .form-group
           label.col-md-4.control-label

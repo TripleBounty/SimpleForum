@@ -19,3 +19,12 @@ h1 {
 {
     color: coral;
 }
+.inactive {
+   pointer-events: none;
+   cursor: default;
+   color: lightcoral;
+}
+p
+{
+    font-size: 18px;
+}
