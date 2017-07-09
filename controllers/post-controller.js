@@ -23,7 +23,22 @@ module.exports = (data) => {
         const postId = req.params.postId;
         data.posts.updateLikes(postId, 1)
             .then(() => {
-                //res.redirect('/');
+                // res.redirect('/');
+            });
+    }
+
+    function newPostForm(req, res) {
+        res.render('new-forum-post');
+    }
+
+    function newPost(req, res) {
+        console.log(req.user);
+        data.post.create(req.body)
+            .then(() => {
+                res.redirect('/');
+            })
+            .catch((error) => {
+                res.render('register-form', { inavalid: error });
             });
     }
 
@@ -31,5 +46,7 @@ module.exports = (data) => {
         getPostById,
         getAll,
         updatePostById,
+        newPostForm,
+        newPost,
     };
 };

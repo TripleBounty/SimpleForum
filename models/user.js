@@ -1,7 +1,6 @@
 const CryptoJS = require('crypto-js');
 
 class User {
-
     static getDataBaseModel(model) {
         const {
             first_name,
