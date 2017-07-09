@@ -56,10 +56,13 @@ module.exports = (data) => {
 
     function profile(req, res) {
         if (!req.isAuthenticated()) {
-            res.status(401).redirect('/unauthorized');
+            res.status(401).redirect('/api/users/login');
         }
 
-        res.status(200).send(`Welcome, ${req.user.username}`);
+        res.render('profile', {
+            'user': req.user,
+            'isAutenticated': true,
+        });
     }
 
     function logout(req, res) {
