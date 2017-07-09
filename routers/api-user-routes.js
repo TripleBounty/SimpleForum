@@ -6,7 +6,7 @@ const attach = (app, data) => {
     const router = new Router();
 
     router.get('/login', userController.login);
-    router.post('/login', userController.register);
+    router.post('/login', userController.signIn);
     router.get('/register', userController.registerForm);
     router.post('/register', userController.register);
     router.get('/profile', userController.profile);

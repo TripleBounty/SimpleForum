@@ -2,7 +2,7 @@ const LocalStrategy = require('passport-local');
 
 module.exports = (passport, data) => {
     const strategy = new LocalStrategy((username, password, done) => {
-        data.findUserByCredentials(username, password)
+        data.users.findUserByCredentials(username, password)
             .then((user) => {
                 if (user) {
                     return done(null, user);
@@ -10,7 +10,9 @@ module.exports = (passport, data) => {
 
                 return done(null, false);
             })
-            .catch((error) => done(error, null));
+            .catch((error) => {
+                done(error, null);
+            });
     });
 
     passport.use(strategy);

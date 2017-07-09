@@ -1,4 +1,4 @@
-mixin main-navbar
+mixin main-navbar(isAutenticated, user)
     nav.navbar.navbar-default
         .container-fluid
             // Brand and toggle get grouped for better mobile display
@@ -14,12 +14,13 @@ mixin main-navbar
             #main-menu.collapse.navbar-collapse
                 ul.nav.navbar-nav
                     li
-                        a.dropdown-toggle(href='/', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                        a(href='/', role='button', aria-haspopup='true', aria-expanded='false')
                             span.glyphicon.glyphicon-home(aria-hidden='true')
-                    li
-                        a(href='/api/users/register')
-                            | Register User 
-                            span.sr-only (current)
+                    if !isAutenticated
+                        li
+                            a(href='/api/users/register')
+                                | Register User 
+                                span.sr-only (current)
                 ul.nav.navbar-nav.navbar-right
                     li
                         #search-form.navbar-form(role='search')
@@ -28,19 +29,25 @@ mixin main-navbar
                                 span.input-group-btn
                                     button#quick-serach-button.btn.btn-default
                                         span.glyphicon.glyphicon-search(aria-hidden='true')
-                    li.dropdown
-                        a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                            span.glyphicon.glyphicon-cog(aria-hidden='true')
-                        ul.dropdown-menu
-                            li
-                                a(href='/') Change Password
-                            li
-                                a(href='/') Personal Settings
-                    li#log-in
-                        a(href='/api/users/login')
-                            span.glyphicon.glyphicon-log-in(aria-hidden='true')
-                    li#user-name-nav
-                        p#nav-username.navbar-text.hidden
-                    li#log-out.hidden
-                        a(href='/api/users/logout')
-                            span.glyphicon.glyphicon-log-out(aria-hidden='true')
+                    if !isAutenticated
+                        li.dropdown
+                            a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                span.glyphicon.glyphicon-cog(aria-hidden='true')
+                        li#log-in
+                            a(href='/api/users/login')
+                                span.glyphicon.glyphicon-log-in(aria-hidden='true')
+                    else
+                        li.dropdown
+                            a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                span.glyphicon.glyphicon-cog(aria-hidden='true')
+                            ul.dropdown-menu
+                                li
+                                    a(href='/') Change Password
+                                li
+                                    a(href='/') Personal Settings
+                        li#user-name-nav
+                            #nav-username.navbar-text
+                                =user.user_name
+                        li#log-out
+                            a(href='/api/users/logout')
+                                span.glyphicon.glyphicon-log-out(aria-hidden='true')

@@ -1,5 +1,6 @@
 const BaseData = require('./base/base-data');
 const User = require('../models/user');
+const CryptoJS = require('crypto-js');
 
 class Users extends BaseData {
     constructor(db) {
@@ -10,6 +11,17 @@ class Users extends BaseData {
         return this.collection.findOne({
             'user_name': username,
         });
+    }
+
+    findUserByCredentials(username, password) {
+        const passwordHash = CryptoJS.SHA256(password).toString();
+        return this.findByUserName(username)
+            .then((user) => {
+                if (!!user && user.user_password !== passwordHash) {
+                    return null;
+                }
+                return user;
+            });
     }
 
     _isModelValid(model) {
