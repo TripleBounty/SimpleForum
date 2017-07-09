@@ -3,12 +3,12 @@ const passport = require('passport');
 module.exports = (app, data) => {
     passport.serializeUser((user, done) => {
         if (user) {
-            done(null, user.id);
+            done(null, user.user_name);
         }
     });
 
-    passport.deserializeUser((id, done) => {
-        data.findUserById(id)
+    passport.deserializeUser((username, done) => {
+        data.users.findByUserName(username)
             .then((user) => {
                 if (user) {
                     return done(null, user);

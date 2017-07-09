@@ -11,9 +11,17 @@ module.exports = (data) => {
     }
 
     function getAll(req, res) {
+        let isAutenticated = false;
+        let user;
+        if (req.isAuthenticated()) {
+            user = req.user;
+            isAutenticated = true;
+        }
         data.posts.getAll()
             .then((posts) => {
                 res.render('home', {
+                    'user': user,
+                    'isAutenticated': isAutenticated,
                     'posts': posts,
                 });
             });

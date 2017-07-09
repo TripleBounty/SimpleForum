@@ -8,19 +8,21 @@ block body
           .panel-heading
             strong Login
           .panel-body
-            form.form-horizontal(role='form')
+            form.form-horizontal(action='', method='post')
               .form-group
-                label.col-sm-3.control-label(for='inputEmail3') Email
+                label.col-sm-3.control-label(for='inputUsername') Email
                 .col-sm-9
-                  input#inputEmail3.form-control(type='email', placeholder='Email', required='')
+                  input#inputUsername.form-control(type='text',name='username' placeholder='Username', required='')
               .form-group
-                label.col-sm-3.control-label(for='inputPassword3') Password
+                label.col-sm-3.control-label(for='inputPassword') Password
                 .col-sm-9
-                  input#inputPassword3.form-control(type='password', placeholder='Password', required='')
+                  input#inputPassword.form-control(type='password',name='password' placeholder='Password', required='')
               .form-group.last
                 .col-sm-offset-3.col-sm-9
-                  button.btn.btn-success.btn-sm(type='submit') Sign in
-                  button.btn.btn-default.btn-sm(type='reset') Reset
+                  .col-xs-6.col-sm-6.col-md-6
+                    button.btn.btn-success.btn-sm(type='submit') Sign in
+                  .col-xs-6.col-sm-6.col-md-6
+                    button.btn.btn-default.btn-sm(type='reset') Reset
           .panel-footer
             | Not Registered? 
-            a(href='#') Register here
+            a(href='/api/users/register') Register here

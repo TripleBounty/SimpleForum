@@ -8,10 +8,15 @@ module.exports = (data) => {
             });
     }
 
-    function register(req, res) {
+    function register(req, res, next) {
         data.users.create(req.body)
             .then(() => {
-                res.redirect('/');
+                req.body = {
+                    username: req.body.user_name,
+                    password: req.body.user_password,
+                };
+
+                signIn(req, res, next);
             })
             .catch((error) => {
                 res.render('register-form', { inavalid: error });
@@ -23,7 +28,7 @@ module.exports = (data) => {
     }
 
     function signIn(req, res, next) {
-        const auth = passport.authenticate('local', function(error, user) {
+        const auth = passport.authenticate('local', (error, user) => {
             if (error) {
                 next(error);
                 return;
@@ -42,7 +47,7 @@ module.exports = (data) => {
                     return;
                 }
 
-                res.redirect('/profile');
+                res.redirect('/');
             });
         });
 
@@ -59,7 +64,7 @@ module.exports = (data) => {
 
     function logout(req, res) {
         req.logout();
-        res.status(200).redirect('/login');
+        res.status(200).redirect('/');
     }
 
     return {
