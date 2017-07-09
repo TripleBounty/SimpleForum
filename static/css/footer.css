@@ -149,3 +149,18 @@ html {
     color: #FFF;
     font-size: 12px;
 }
+
+@media screen and (max-width: 1280px) {
+    footer 
+    {
+        background-color: #0c1a1e;
+        min-height: 100px;
+        font-family: 'Open Sans', sans-serif;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        overflow: hidden;
+        zoom: 0.5;
+    }
+}
