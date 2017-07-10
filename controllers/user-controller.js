@@ -19,7 +19,11 @@ module.exports = (data) => {
                 signIn(req, res, next);
             })
             .catch((error) => {
-                res.render('register-form', { inavalid: error });
+                data.countries.getAll()
+                    .then((countries) => {
+                        res.render('register-form', 
+                            { inavalid: error, countries: countries });
+                    });
             });
     }
 

@@ -32,7 +32,28 @@ module.exports = (data) => {
         const node = +req.body.node;
         data.posts.updateLikes(postId, node)
             .then(() => {
-                res.send(200);
+                res.status(200);
+            });
+    }
+
+    function newPostForm(req, res) {
+        if (!req.isAuthenticated()) {
+            res.status(401).redirect('/api/users/login');
+        }
+        res.render('new-forum-post');
+    }
+
+    function newPost(req, res) {
+        if (!req.isAuthenticated()) {
+            res.status(401).redirect('/api/users/login');
+        }
+
+        data.posts.create(req.body, req.user)
+            .then(() => {
+                res.redirect('/');
+            })
+            .catch((error) => {
+                res.render('new-forum-post', { inavalid: error });
             });
     }
 
@@ -40,5 +61,7 @@ module.exports = (data) => {
         getPostById,
         getAll,
         updatePostById,
+        newPostForm,
+        newPost,
     };
 };

@@ -1,0 +1,30 @@
+extends shared/_master
+block scripts
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js')
+
+block body
+    .container
+        form#new_post_form.well.form-horizontal(action='', method='post')
+            fieldset
+                legend
+                    center
+                        h2
+                            b New Post
+            br
+            .form-group
+                label.col-md-4.control-label(for='inputPostTitle') Title
+                .col-md-4.inputGroupContainer
+                    .input-group
+                        input#inputTitle.form-control(name='title', placeholder='Title', type='text')
+            .form-group
+                label.col-md-4.control-label(for='postContent') Content
+                .col-md-4.inputGroupContainer
+                    .input-group
+                        textarea#inputPostContent.form-control(rows='5' name='content', placeholder='Content', type='text')
+            // Button
+            .form-group
+                label.col-md-4.control-label
+                .col-md-4
+                    button.btn.btn-primary(type='submit')
+                        |SUBMIT 
+    script(src='/static/js/new-post-validator.js')
