@@ -46,7 +46,7 @@ mixin main-navbar(isAutenticated, user)
                                 li
                                     a(href='/') Personal Settings
                         li#user-name-nav
-                            #nav-username.navbar-text
+                            a(href='/api/users/profile')
                                 =user.user_name
                         li#log-out
                             a(href='/api/users/logout')

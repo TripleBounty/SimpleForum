@@ -28,14 +28,18 @@ module.exports = (data) => {
     }
 
     function updatePostById(req, res) {
-        const postId = req.params.postId;
-        data.posts.updateLikes(postId, 1)
+        const postId = +req.body.postId;
+        const node = +req.body.node;
+        data.posts.updateLikes(postId, node)
             .then(() => {
-                // res.redirect('/');
+                res.status(200);
             });
     }
 
     function newPostForm(req, res) {
+        if (!req.isAuthenticated()) {
+            res.status(401).redirect('/api/users/login');
+        }
         res.render('new-forum-post');
     }
 
