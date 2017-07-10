@@ -40,13 +40,16 @@ module.exports = (data) => {
     }
 
     function newPost(req, res) {
-        console.log(req.user);
-        data.post.create(req.body)
+        if (!req.isAuthenticated()) {
+            res.status(401).redirect('/api/users/login');
+        }
+
+        data.posts.create(req.body, req.user)
             .then(() => {
                 res.redirect('/');
             })
             .catch((error) => {
-                res.render('register-form', { inavalid: error });
+                res.render('new-forum-post', { inavalid: error });
             });
     }
 

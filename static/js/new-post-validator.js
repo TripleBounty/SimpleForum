@@ -8,7 +8,7 @@ $(document).ready(() => {
             validating: 'glyphicon glyphicon-refresh',
         },
         fields: {
-            post_title: {
+            title: {
                 validators: {
                     stringLength: {
                         min: 3,
@@ -18,10 +18,10 @@ $(document).ready(() => {
                     },
                 },
             },
-            post_content: {
+            content: {
                 validators: {
                     stringLength: {
-                        min: 128,
+                        min: 32,
                     },
                     notEmpty: {
                         message: 'Your post should contain at least 128 characters',

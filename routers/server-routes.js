@@ -7,8 +7,8 @@ const attach = (app, data) => {
     router.get('/', postControler.getAll);
     router.post('/increase-likes/:postId', postControler.updatePostById);
     router.get('/forum-post/:postId', postControler.getPostById);
-    router.get('/new-forum-post/', postControler.newPostForm);
-//    router.post('/new-forum-post/', postControler.newPost);
+    router.get('/new-forum-post', postControler.newPostForm);
+    router.post('/new-forum-post', postControler.newPost);
 
     app.use('/', router);
 };
