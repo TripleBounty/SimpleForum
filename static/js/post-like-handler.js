@@ -15,6 +15,7 @@ $('.likesLink').on('click', (event) => {
         },
         method: 'POST',
     }).then((response) => {
+        console.log('mitko');
         targetDiv.innerHTML = currentVal + changeingValue;
         const negativeLike = document.getElementById(postId+'d');
         if (negativeLike.classList.contains('inactive')) {
