@@ -21,7 +21,7 @@ module.exports = (data) => {
             .catch((error) => {
                 data.countries.getAll()
                     .then((countries) => {
-                        res.render('register-form', 
+                        res.render('register-form',
                             { inavalid: error, countries: countries });
                     });
             });
