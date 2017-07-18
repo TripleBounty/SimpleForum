@@ -1,4 +1,8 @@
+/* globals Buffer */
+
 const passport = require('passport');
+const AWS = require('aws-sdk');
+const bucketConfig = require('../app/config/env-configs/bucket-config');
 
 module.exports = (data) => {
     function registerForm(req, res) {
@@ -21,7 +25,7 @@ module.exports = (data) => {
             .catch((error) => {
                 data.countries.getAll()
                     .then((countries) => {
-                        res.render('register-form', 
+                        res.render('register-form',
                             { inavalid: error, countries: countries });
                     });
             });
@@ -74,6 +78,48 @@ module.exports = (data) => {
         res.status(200).redirect('/');
     }
 
+    function uploadAvatar(req, res) {
+        const s3Bucket = _connectBucket();
+
+        const image = req.body.image;
+        const imageData = image.replace(/^data:image\/\w+;base64,/, '');
+
+        const buf = Buffer.from(imageData, 'base64');
+
+        const datetime = new Date();
+
+        // eslint-disable-next-line max-len
+        const imgName = `img_${datetime.getFullYear()}_${datetime.getMonth()}_${datetime.getDate()}_${datetime.getTime()}.png`;
+
+        const imgData = {
+            Key: imgName,
+            Body: buf,
+            ACL: 'public-read',
+            ContentEncoding: 'base64',
+            ContentType: 'image/png',
+        };
+
+        s3Bucket.upload(imgData, (err, imgDataBucket) => {
+            if (err) {
+                res.status(400).send({ 'url': bucketConfig.defaultAvatar });
+            } else {
+                res.status(200).send({ 'url': imgDataBucket.Location });
+            }
+        });
+    }
+
+    function _connectBucket() {
+        const loginProfile = {
+            'accessKeyId': bucketConfig.accessKeyId,
+            'secretAccessKey': bucketConfig.secretAccessKey,
+            'region': bucketConfig.region,
+        };
+
+        AWS.config.update(loginProfile);
+
+        return new AWS.S3({ params: { Bucket: bucketConfig.name } });
+    }
+
     return {
         register,
         registerForm,
@@ -81,5 +127,6 @@ module.exports = (data) => {
         signIn,
         profile,
         logout,
+        uploadAvatar,
     };
 };

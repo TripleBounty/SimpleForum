@@ -32,7 +32,7 @@ module.exports = (data) => {
         const node = +req.body.node;
         data.posts.updateLikes(postId, node)
             .then(() => {
-                res.status(200);
+                res.status(200).send();
             });
     }
 

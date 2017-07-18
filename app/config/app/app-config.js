@@ -9,8 +9,8 @@ const cookieParser = require('cookie-parser');
 const appConfig = (app) => {
     app.set('view engine', 'pug');
 
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json({ limit: '5mb' }));
+    app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 
     app.use(cookieParser());
     app.use(session({ secret: 'purple unicorn' }));
