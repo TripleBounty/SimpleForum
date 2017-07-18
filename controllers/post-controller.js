@@ -1,3 +1,21 @@
+const express = require('express');
+const app = express();
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+function guid() {
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+}
+
+const value = guid();
+
+function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+}
+
 module.exports = (data) => {
     function getPostById(req, res) {
         const id = req.params.postId;
@@ -10,6 +28,13 @@ module.exports = (data) => {
             });
     }
 
+    function showComment(req, res) {
+        data.posts.getAll()
+            .then(() => {
+                res.status(200).send();
+            });
+    }
+
     function getAll(req, res) {
         let isAutenticated = false;
         let user;
@@ -19,6 +44,7 @@ module.exports = (data) => {
         }
         data.posts.getAll()
             .then((posts) => {
+                res.cookie(value, 'session', { maxAge: 9999 });
                 res.render('home', {
                     'user': user,
                     'isAutenticated': isAutenticated,
@@ -30,8 +56,10 @@ module.exports = (data) => {
     function updatePostById(req, res) {
         const postId = +req.body.postId;
         const node = +req.body.node;
-        data.posts.updateLikes(postId, node)
+        const postType = req.body.postType;
+        data.posts.updateLikes(postId, node, postType)
             .then(() => {
+                res.cookie(postId + postType, '', { maxAge: 9999 });
                 res.status(200).send();
             });
     }
@@ -63,5 +91,6 @@ module.exports = (data) => {
         updatePostById,
         newPostForm,
         newPost,
+        showComment,
     };
 };

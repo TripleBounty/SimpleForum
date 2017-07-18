@@ -1,6 +1,16 @@
 const BaseData = require('./base/base-data');
 const User = require('../models/user');
 const CryptoJS = require('crypto-js');
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const app = express();
+
+app.use(cookieParser());
+
+app.get('/', function(req, resp) {
+    resp.cookie('myFirstCookie', 'looks Good', { maxAge: 5000 });
+    resp.end('wow');
+});
 
 class Users extends BaseData {
     constructor(db) {

@@ -1,0 +1,13 @@
+.postBut{
+    float: right;
+}
+.commentPostBody{
+    width: 100%;
+}
+.btnComment{
+    visibility: visible;
+}
+.visibleHiddnen{
+    visibility: hidden;
+    display: none;
+}
