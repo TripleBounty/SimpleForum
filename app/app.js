@@ -8,7 +8,7 @@ module.exports = (data) => {
 
     app.get('/removeCookie', function(req, resp) {
         resp.clearCookie('27d');
-        resp.end('pruc');
+        resp.end('prucs');
     });
 
     require('./config/app/app-config')(app);

@@ -28,13 +28,6 @@ module.exports = (data) => {
             });
     }
 
-    function showComment(req, res) {
-        data.posts.getAll()
-            .then(() => {
-                res.status(200).send();
-            });
-    }
-
     function getAll(req, res) {
         let isAutenticated = false;
         let user;
@@ -91,6 +84,5 @@ module.exports = (data) => {
         updatePostById,
         newPostForm,
         newPost,
-        showComment,
     };
 };
