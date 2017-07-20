@@ -1,8 +1,13 @@
 extends shared/_master
+
 block scripts
-    script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js')
+  script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js')
+  script(src='/libs/croppie/croppie.js')
+  link(rel='stylesheet', href='/libs/croppie/croppie.css')
+
 
 block body
+  .modal-loading
   .container
     form#contact_form.well.form-horizontal(action='', method='post')
       fieldset
@@ -12,80 +17,100 @@ block body
             h2
               b Registration Form
         br
-        // Text input
-        .form-group
-          label.col-md-4.control-label(for='inputFirstName') First Name
-          .col-md-4.inputGroupContainer
-            .input-group
-              span.input-group-addon
-                i.glyphicon.glyphicon-user
-              input#inputFirstName.form-control(name='first_name', placeholder='First Name', type='text')
-        // Text input
-        .form-group
-          label.col-md-4.control-label(for='inputLastName') Last Name
-          .col-md-4.inputGroupContainer
-            .input-group
-              span.input-group-addon
-                i.glyphicon.glyphicon-user
-              input#inputLastName.form-control(name='last_name', placeholder='Last Name', type='text')
-        // Text input
-        .form-group
-          label.col-md-4.control-label(for='inputDate') Birth Date
-          .col-md-4.inputGroupContainer
-            .input-group
-              span.input-group-addon
-                i.glyphicon.glyphicon-user
-              input#inputDate.form-control(name='date', placeholder='Birth Date', type='date')
-        .form-group
-          label.col-md-4.control-label Country
-          .col-md-4.selectContainer
-            .input-group
-              span.input-group-addon
-                i.glyphicon.glyphicon-list
-              select.form-control.selectpicker(name='country')
-                option(value='') Country
-                each country in countries
-                  option #{country.name}
-        // Text input
-        .form-group
-          label.col-md-4.control-label(for='inputUserName') Username
-          .col-md-4.inputGroupContainer
-            .input-group
-              span.input-group-addon
-                i.glyphicon.glyphicon-user
-              input#inputUserName.form-control(name='user_name', placeholder='Username', type='text')
-        // Text input
-        .form-group
-          label.col-md-4.control-label(for='inputPassword') Password
-          .col-md-4.inputGroupContainer
-            .input-group
-              span.input-group-addon
-                i.glyphicon.glyphicon-user
-              input#inputPassword.form-control(name='user_password', placeholder='Password', type='password')
-        // Text input
-        .form-group
-          label.col-md-4.control-label(for='inputConfirmPassword') Confirm Password
-          .col-md-4.inputGroupContainer
-            .input-group
-              span.input-group-addon
-                i.glyphicon.glyphicon-user
-              input#inputConfirmPassword.form-control(name='confirm_password', placeholder='Confirm Password', type='password')
-        // Text input
-        .form-group
-          label.col-md-4.control-label(for='inputEmail') E-Mail
-          .col-md-4.inputGroupContainer
-            .input-group
-              span.input-group-addon
-                i.glyphicon.glyphicon-envelope
-              input#inputEmail.form-control(name='email', placeholder='E-Mail Address', type='text')
-        // Text input
-        .form-group
-          label.col-md-4.control-label(for='inputMobile') Contact No.
-          .col-md-4.inputGroupContainer
-            .input-group
-              span.input-group-addon
-                i.glyphicon.glyphicon-earphone
-              input#inputMobile.form-control(name='contact_no', placeholder='(+359)', type='text')
+        .register-group
+          .col-left
+            img#avatar-img(src="https://s3.eu-central-1.amazonaws.com/simple-forum/DefaultAvatar.png")
+            input#input-avatar-img(type='hidden', name='avatar', value='https://s3.eu-central-1.amazonaws.com/simple-forum/DefaultAvatar.png')
+            button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#upload-avatar') Select avatar
+            // Modal
+            #upload-avatar.modal.fade(role='dialog')
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    .modal-title Upload Image
+                  .modal-body
+                    #upload-img-avatar(style='width:350px')
+                    strong Select Image:
+                    br
+                    input#upload(type='file')
+                  .modal-footer
+                    button#upload-avatar-OK.btn.btn-primary(type='button') OK
+                    button.btn.btn-default(type='button', data-dismiss='modal') Close
+          .col-right
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputFirstName') First Name
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-user
+                  input#inputFirstName.form-control(name='first_name', placeholder='First Name', type='text')
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputLastName') Last Name
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-user
+                  input#inputLastName.form-control(name='last_name', placeholder='Last Name', type='text')
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputDate') Birth Date
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-user
+                  input#inputDate.form-control(name='date', placeholder='Birth Date', type='date')
+            .form-group
+              label.col-md-4.control-label Country
+              .col-md-4.selectContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-list
+                  select.form-control.selectpicker(name='country')
+                    option(value='') Country
+                    each country in countries
+                      option #{country.name}
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputUserName') Username
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-user
+                  input#inputUserName.form-control(name='user_name', placeholder='Username', type='text')
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputPassword') Password
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-user
+                  input#inputPassword.form-control(name='user_password', placeholder='Password', type='password')
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputConfirmPassword') Confirm Password
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-user
+                  input#inputConfirmPassword.form-control(name='confirm_password', placeholder='Confirm Password', type='password')
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputEmail') E-Mail
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-envelope
+                  input#inputEmail.form-control(name='email', placeholder='E-Mail Address', type='text')
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputMobile') Contact No.
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-earphone
+                  input#inputMobile.form-control(name='contact_no', placeholder='(+359)', type='text')
         if inavalid
           .form-group
             label.col-md-6.control-label 
@@ -98,3 +123,4 @@ block body
               |SUBMIT 
               span.glyphicon.glyphicon-send
   script(src='/static/js/register-form-validator.js')
+  script(src='/static/js/crop-img.js')
