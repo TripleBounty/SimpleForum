@@ -9,7 +9,7 @@ $(document).ready(() => {
             method: 'GET',
         }).then((response) => {
             const element = event3.target;
-            $( element ).children().removeClass('visibleHiddnen');
+            $( element ).next().removeClass('visibleHiddnen');
         }).catch((err) => {
             console.error(err);
         });

@@ -24,4 +24,4 @@ class Comments extends BaseData {
     }
 }
 
-//module.exports = Comments;
+module.exports = Comments;

@@ -1,31 +1,30 @@
 mixin newComment
     .container
-      a.btnComment
-        div.btn.btn-primary
-          i.icon.icon-file
-          span.glyphicon.glyphicon-pencil
+      a.btn.btn-primary.btnComment
+        i.glyphicon.glyphicon-pencil
         |  Comment
-        .row.visibleHiddnen
-          .col-md-6.col-md-offset-3
-            form.facebook-share-box(action= '#', method= 'post', role= 'form', enctype= 'multipart/form-data').commentPostBody
-              .share
-                .arrow
-                .panel.panel-default
-                  .panel-heading
-                    i.fa.fa-file
-                    |  Add a Comment
-                  .panel-body
-                    div
-                      input#status_message.form-control.message(name='message', cols='40', rows='10', style='height: 62px; overflow: hidden;', placeholder="What's on your mind ?")
-                  .panel-footer
-                    .row
-                      .col-md-7
-                        .form-group
-                          .btn-group
-                            input(type= 'file', name= 'pic', accept= 'image/*')
-                      .col-md-5
-                        .form-group
-                          button.btn.btn-primary(type= 'submit', name= 'submit', value= 'Post').postBut
-                              |SUBMIT
-                              span.glyphicon.glyphicon-send
-    script(src='/static/js/comments-handler.js')
+      .row.visibleHiddnen
+        .col-md-6.col-md-offset-3
+          form.facebook-share-box(action= '#', method= 'post', role= 'form', enctype= 'multipart/form-data').commentPostBody
+            .share
+              .arrow
+              .panel.panel-default
+                .panel-heading
+                  i.fa.fa-file
+                  |  Add a Comment
+                .panel-body
+                  div
+                    input#status_message.form-control.message(name='message', cols='40', rows='10', style='height: 62px; overflow: hidden;', placeholder="What's on your mind ?")
+                .panel-footer
+                  .row
+                    .col-md-7
+                      .form-group
+                        .btn-group
+                          input(type= 'file', name= 'pic', accept= 'image/*')
+                    .col-md-5
+                      .form-group
+                        button.btn.btn-primary(type="submit" formmethod="post" formaction="/comment").postBut
+                            |SUBMIT
+                            span.glyphicon.glyphicon-send
+    script(src= '/static/js/comments-handler.js')
+    
