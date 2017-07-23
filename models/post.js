@@ -30,7 +30,6 @@ class Post {
 
         this._validateTitleField('title', 3, 64, title, error);
         this._validateContentTextBox('content', 3, content, error);
-        console.log(error);
         if (error.length !== 0) {
             return 'Invalid values';
         }
@@ -39,7 +38,6 @@ class Post {
     }
 
     static _validateTitleField(name, min, max, field, error) {
-        console.log('title - ' + field.length);
         if (min > field.length && field.length < max) {
             error.push({
                 field: name,
@@ -49,7 +47,6 @@ class Post {
     }
 
     static _validateContentTextBox(name, min, field, error) {
-        console.log('content - ' + field.length);
         if (field.length < min) {
             error.push({
                 field: name,

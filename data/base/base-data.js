@@ -1,3 +1,5 @@
+const { ObjectID } = require('mongodb');
+
 class BaseData {
     constructor(db, ModelClass) {
         this.db = db;
@@ -12,7 +14,7 @@ class BaseData {
 
     findById(id) {
         return this.collection.findOne({
-            id: id,
+            _id: new ObjectID(id),
         });
     }
 
