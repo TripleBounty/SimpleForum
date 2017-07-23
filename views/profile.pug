@@ -1,1 +1,45 @@
 extends shared/_master
+
+block body
+  .container.well
+    .row
+      .col-xs-12.col-sm-3.center
+        span.profile-picture
+          img#avatar2.editable.img-responsive(alt='Avatar', src=user.avatar)
+      .col-xs-12.col-sm-9
+        .profile-user-info
+          .profile-info-row
+            .profile-info-name  Username 
+            .profile-info-value
+              span
+                =user.user_name
+          .profile-info-row
+            .profile-info-name  Location 
+            .profile-info-value
+              span
+                =user.country
+          .profile-info-row
+            .profile-info-name  First Name 
+            .profile-info-value
+              span
+                =user.first_name
+          .profile-info-row
+            .profile-info-name  Last Name 
+            .profile-info-value
+              span
+                =user.last_name
+          .profile-info-row
+            .profile-info-name  Birth Date 
+            .profile-info-value
+              span
+                =user.date
+          .profile-info-row
+            .profile-info-name  Email 
+            .profile-info-value
+              span
+                =user.email
+          .profile-info-row
+            .profile-info-name  Contact No. 
+            .profile-info-value
+              span
+                =user.contact_no
