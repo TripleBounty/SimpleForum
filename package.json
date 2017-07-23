@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/gulp server"
+    "test": "./node_modules/.bin/mocha tests/unit/sample.test.js",
+    "start": "gulp server"
   },
   "repository": {
     "type": "git",
@@ -36,5 +36,9 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-rc.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2"
   }
 }

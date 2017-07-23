@@ -62,5 +62,12 @@ body.loading .modal-loading {
     display: block;
 }
 
+body {
+    background-color: #cccccc;
+    background-image: url("https://media.giphy.com/media/bTP2EwKmAdEEo/giphy.gif");
+    opacity: 0.9;
+    filter: alpha(opacity=50);
+    z-index: -1;
+}
 
 /* End css for modal loader spiner */
