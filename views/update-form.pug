@@ -1,0 +1,110 @@
+extends shared/_master
+
+block scripts
+  script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js')
+  script(src='/libs/croppie/croppie.js')
+  link(rel='stylesheet', href='/libs/croppie/croppie.css')
+
+
+block body
+  .modal-loading
+  .container
+    form#contact_form.well.form-horizontal(action='', method='post')
+      fieldset
+        // Form Name
+        legend
+          center
+            h2
+              b Update Details
+        br
+        .register-group
+          .col-left
+            img#avatar-img(src=user.avatar)
+            input#input-avatar-img(type='hidden', name='avatar', value=user.avatar)
+            button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#upload-avatar') Select avatar
+            // Modal
+            #upload-avatar.modal.fade(role='dialog')
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    .modal-title Upload Image
+                  .modal-body
+                    #upload-img-avatar(style='width:350px')
+                    strong Select Image:
+                    br
+                    input#upload(type='file')
+                  .modal-footer
+                    button#upload-avatar-OK.btn.btn-primary(type='button') OK
+                    button.btn.btn-default(type='button', data-dismiss='modal') Close
+          .col-right
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputFirstName') First Name
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-user
+                  input#inputFirstName.form-control(name='first_name', placeholder='First Name', type='text' , value = user.first_name)
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputLastName') Last Name
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-user
+                  input#inputLastName.form-control(name='last_name', placeholder='Last Name', type='text', value = user.last_name)
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputDate') Birth Date
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-user
+                  input#inputDate.form-control(name='date', placeholder='Birth Date', type='date', value = user.date)
+            .form-group
+              label.col-md-4.control-label Country
+              .col-md-4.selectContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-list
+                  select.form-control.selectpicker(name='country')
+                    option(value='') Country
+                    each country in countries
+                      option(selected=country.name == user.country) #{country.name}
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputUserName') Username
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-user
+                  input#inputUserName.form-control(name='user_name', placeholder='Username', type='text', value = user.user_name, readonly)
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputEmail') E-Mail
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-envelope
+                  input#inputEmail.form-control(name='email', placeholder='E-Mail Address', type='text', value = user.email)
+            // Text input
+            .form-group
+              label.col-md-4.control-label(for='inputMobile') Contact No.
+              .col-md-4.inputGroupContainer
+                .input-group
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-earphone
+                  input#inputMobile.form-control(name='contact_no', placeholder='(+359)', type='text', value = user.contact_no)
+        if inavalid
+          .form-group
+            label.col-md-6.control-label 
+              =inavalid
+        // Button
+        .form-group
+          label.col-md-4.control-label
+          .col-md-4
+            button.btn.btn-warning(type='submit')
+              |Update 
+              span.glyphicon.glyphicon-send
+  script(src='/static/js/register-form-validator.js')
+  script(src='/static/js/crop-img.js')

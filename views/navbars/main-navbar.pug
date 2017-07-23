@@ -49,7 +49,7 @@ mixin main-navbar(isAutenticated, user)
                                 li
                                     a(href='/') Change Password
                                 li
-                                    a(href='/') Personal Settings
+                                    a(href='/api/users/update') Personal Settings
                         li#user-name-nav
                             a(href='/api/users/profile')
                                 =user.user_name

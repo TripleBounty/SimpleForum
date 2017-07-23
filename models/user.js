@@ -1,7 +1,7 @@
 const CryptoJS = require('crypto-js');
 
 class User {
-    static getDataBaseModel(model) {
+    static getDataBaseModel(model, type) {
         const {
             first_name,
             last_name,
@@ -11,7 +11,20 @@ class User {
             user_name,
             user_password,
             avatar,
+            contact_no,
         } = model;
+
+        if (type === 'update') {
+            return {
+                first_name: first_name,
+                last_name: last_name,
+                date: date,
+                country: country,
+                email: email,
+                avatar: avatar,
+                contact_no: contact_no,
+            };
+        }
 
         // eslint-disable-next-line new-cap
         const passwordHash = CryptoJS.SHA256(user_password).toString();
@@ -25,10 +38,11 @@ class User {
             user_name: user_name,
             user_password: passwordHash,
             avatar: avatar,
+            contact_no: contact_no,
         };
     }
 
-    static validate(user) {
+    static validate(user, type) {
         const {
             first_name,
             last_name,
@@ -45,24 +59,27 @@ class User {
             first_name, error);
         this._validateStringField('last name', 2, /^[a-zA-Z]+$/,
             last_name, error);
-        this._validateStringField('user name', 4, /^[a-zA-Z0-9_\.]+$/,
-            user_name, error);
+        if (type === 'create') {
+            this._validateStringField('user name', 4, /^[a-zA-Z0-9_\.]+$/,
+                user_name, error);
+        }
         this._validateEmail(email, error);
         this._validateDate(date, error);
-
-        if (user_password.length < 8 &&
-            user_password.localeCompare(confirm_password) === 0) {
-            error.push({
-                field: 'password',
-                message: 'Invalid password',
-            });
+        if (type === 'create') {
+            if (user_password.length < 8 &&
+                user_password.localeCompare(confirm_password) === 0) {
+                error.push({
+                    field: 'password',
+                    message: 'Invalid password',
+                });
+            }
         }
 
         if (error.length !== 0) {
-            return 'Invalid values';
+            return false;
         }
 
-        return 'no';
+        return true;
     }
 
     static _validateStringField(name, min, regex, field, error) {
@@ -86,7 +103,7 @@ class User {
 
     static _validateNumber(field, error) {
         const regexNumber = /^[+0-9]+$/;
-        if (field.length != 13 && !regexNumber.test(field)) {
+        if (field.length !== 13 && !regexNumber.test(field)) {
             error.push({
                 field: 'Contact no',
                 message: 'Invalid mobile number',

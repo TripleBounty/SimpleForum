@@ -31,6 +31,46 @@ module.exports = (data) => {
             });
     }
 
+    function updateForm(req, res) {
+        if (!req.isAuthenticated()) {
+            res.status(401).redirect('/api/users/login');
+        }
+
+        data.countries.getAll()
+            .then((countries) => {
+                res.render('update-form', {
+                    'countries': countries,
+                    'user': req.user,
+                    'isAutenticated': true,
+                });
+            });
+    }
+
+    function update(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.status(401).redirect('/api/users/login');
+        }
+
+        const body = req.body;
+        body.user_name = req.user.user_name;
+
+        data.users.update(body)
+            .then(() => {
+                res.redirect('/api/users/profile');
+            })
+            .catch((error) => {
+                data.countries.getAll()
+                    .then((countries) => {
+                        res.render('update-form', {
+                            'inavalid': error,
+                            'countries': countries,
+                            'user': req.user,
+                            'isAutenticated': true,
+                        });
+                    });
+            });
+    }
+
     function login(req, res) {
         res.render('login-form');
     }
@@ -69,8 +109,37 @@ module.exports = (data) => {
 
         res.render('profile', {
             'user': req.user,
+            'user_profile': req.user,
             'isAutenticated': true,
         });
+    }
+
+    function getUserProfile(req, res) {
+        let isAutenticated = false;
+        let user;
+        if (req.isAuthenticated()) {
+            user = req.user;
+            isAutenticated = true;
+        }
+
+        const username = req.params.username;
+
+        data.users.findByUserName(username)
+            .then((userProfile) => {
+                if (userProfile) {
+                    res.render('profile', {
+                        'user': user,
+                        'user_profile': userProfile,
+                        'isAutenticated': isAutenticated,
+                    });
+                } else {
+                    res.render('profile', {
+                        'user': user,
+                        'user_profile': {},
+                        'isAutenticated': isAutenticated,
+                    });
+                }
+            });
     }
 
     function logout(req, res) {
@@ -123,9 +192,12 @@ module.exports = (data) => {
     return {
         register,
         registerForm,
+        update,
+        updateForm,
         login,
         signIn,
         profile,
+        getUserProfile,
         logout,
         uploadAvatar,
     };
