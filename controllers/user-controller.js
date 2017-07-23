@@ -31,6 +31,46 @@ module.exports = (data) => {
             });
     }
 
+    function updateForm(req, res) {
+        if (!req.isAuthenticated()) {
+            res.status(401).redirect('/api/users/login');
+        }
+
+        data.countries.getAll()
+            .then((countries) => {
+                res.render('update-form', {
+                    'countries': countries,
+                    'user': req.user,
+                    'isAutenticated': true,
+                });
+            });
+    }
+
+    function update(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.status(401).redirect('/api/users/login');
+        }
+
+        const body = req.body;
+        body.user_name = req.user.user_name;
+
+        data.users.update(body)
+            .then(() => {
+                res.redirect('/api/users/profile');
+            })
+            .catch((error) => {
+                data.countries.getAll()
+                    .then((countries) => {
+                        res.render('update-form', {
+                            'inavalid': error,
+                            'countries': countries,
+                            'user': req.user,
+                            'isAutenticated': true,
+                        });
+                    });
+            });
+    }
+
     function login(req, res) {
         res.render('login-form');
     }
@@ -152,6 +192,8 @@ module.exports = (data) => {
     return {
         register,
         registerForm,
+        update,
+        updateForm,
         login,
         signIn,
         profile,

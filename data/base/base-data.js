@@ -17,11 +17,8 @@ class BaseData {
     }
 
     create(model) {
-        if (this._isModelValid) {
-            const error = this._isModelValid(model);
-            if (error !== 'no') {
-                return Promise.reject(error);
-            }
+        if (!this._isModelValid(model)) {
+            return Promise.reject('invalid data');
         }
 
         return this.collection.insert(model);
@@ -31,6 +28,9 @@ class BaseData {
         return this.ModelClass.name.toLowerCase() + 's';
     }
 
+    _isModelValid(model) {
+        return true;
+    }
 }
 
 module.exports = BaseData;
