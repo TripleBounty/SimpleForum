@@ -15,6 +15,7 @@ module.exports = (data) => {
         if (!req.isAuthenticated()) {
             res.status(401).redirect('/api/users/login');
         }
+
         data.comments.create(req.body, req.user)
             .then(() => {
                 res.redirect('/');

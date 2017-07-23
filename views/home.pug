@@ -50,11 +50,11 @@ block body
                   li
                     | Positive Nodes 
                     if(post.nodes < 150)
-                        text(id='positive'+post.id).positiveNodes=post.nodes
+                        text(id='positive'+postId).positiveNodes=post.nodes
                     else
                         i.glyphicon.glyphicon-fire.positiveNodes.manyNodes
                         |  
-                        text(id='positive'+post.id).positiveNodes.manyNodes=post.nodes
+                        text(id='positive'+postId).positiveNodes.manyNodes=post.nodes
                         |                     
                   |  
                   li |

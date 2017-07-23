@@ -26,10 +26,8 @@ module.exports = (data) => {
         }
 
         const id = req.params.postId;
-        console.log(id);
         data.posts.findById(id)
             .then((post) => {
-                console.log(post);
                 res.render('forum-post', {
                     'user': user,
                     'isAutenticated': isAutenticated,
@@ -57,7 +55,7 @@ module.exports = (data) => {
     }
 
     function updatePostById(req, res) {
-        const postId = +req.body.postId;
+        const postId = req.body.postId;
         const node = +req.body.node;
         const postType = req.body.postType;
         data.posts.updateLikes(postId, node, postType)

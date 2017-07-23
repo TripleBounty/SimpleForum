@@ -17,7 +17,7 @@ for (let i= 0; i <200; i++) {
 $('.likesLink').on('click', (event) => {
     event.preventDefault(); // Stop the form from causing a page refresh.
     let postId = event.target.id;
-    postId = +(postId.substring(0, postId.length - 1));
+    postId = postId.substring(0, postId.length - 1);
     const elemntToChange = 'positive' + postId;
     const targetDiv = document.getElementById(elemntToChange);
     const currentVal = parseFloat(targetDiv.innerHTML);
@@ -45,7 +45,7 @@ $('.likesLink').on('click', (event) => {
 $('.hatesLink').on('click', (event) => {
     event.preventDefault(); // Stop the form from causing a page refresh.
     let postId = event.target.id;
-    postId = +(postId.substring(0, postId.length - 1));
+    postId = postId.substring(0, postId.length - 1);
     const elemntToChange = 'positive' + postId;
     const targetDiv = document.getElementById(elemntToChange);
     const currentVal = parseFloat(targetDiv.innerHTML);

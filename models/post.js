@@ -13,7 +13,7 @@ class Post {
             title: title,
             content: content,
             date: date,
-            nodes: 0,
+            nodes: nodes,
             username: user_name,
             img: avatar,
             comments: [],

@@ -1,5 +1,6 @@
 const BaseData = require('./base/base-data');
 const Post = require('../models/post');
+const { ObjectID } = require('mongodb');
 
 class Posts extends BaseData {
     constructor(db) {
@@ -21,6 +22,7 @@ class Posts extends BaseData {
         }
         const dbModel = this.ModelClass.getDataBaseModel(model);
 
+        dbModel.nodes = 0;
         dbModel.date = this._getDate();
         dbModel.username = user.user_name;
         dbModel.img = user.avatar;
@@ -43,11 +45,11 @@ class Posts extends BaseData {
         return date.toDateString();
     }
 
-    updateLikes(postId, like) {
-        return this.findById(postId)
+    updateLikes(id, like) {
+        return this.findById(id)
             .then((post) => {
                 this.collection.update({
-                    id: post.id,
+                    _id: new ObjectID(id),
                 }, {
                         $set: {
                             nodes: post.nodes + like,
