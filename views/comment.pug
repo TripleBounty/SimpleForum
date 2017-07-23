@@ -1,12 +1,11 @@
 mixin newComment
     .container
-      .row
+      a.btn.btn-primary.btnComment
+        i.glyphicon.glyphicon-pencil
+        |  Comment
+      .row.visibleHiddnen
         .col-md-6.col-md-offset-3
           form.facebook-share-box(action= '#', method= 'post', role= 'form', enctype= 'multipart/form-data').commentPostBody
-            button.btn.btn-primary(title= '', href= '#')
-                i.icon.icon-file
-                span.glyphicon.glyphicon-pencil
-                |  Comment  
             .share
               .arrow
               .panel.panel-default
@@ -15,15 +14,17 @@ mixin newComment
                   |  Add a Comment
                 .panel-body
                   div
-                    input#status_message.form-control.message(name='message', cols='40', rows='10', style='height: 62px; overflow: hidden;', placeholder="What's on your mind ?", required='')
+                    input#status_message.form-control.message(name='message', cols='40', rows='10', style='height: 62px; overflow: hidden;', placeholder="What's on your mind ?")
                 .panel-footer
                   .row
                     .col-md-7
                       .form-group
                         .btn-group
-                          input(type='file', name='pic', accept='image/*')
+                          input(type= 'file', name= 'pic', accept= 'image/*')
                     .col-md-5
                       .form-group
-                        button.btn.btn-primary(type= 'submit', name= 'submit', value= 'Post').postBut
+                        button.btn.btn-primary(type="submit" formmethod="post" formaction="/comment").postBut
                             |SUBMIT
                             span.glyphicon.glyphicon-send
+    script(src= '/static/js/comments-handler.js')
+    

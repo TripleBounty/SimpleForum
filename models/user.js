@@ -10,18 +10,21 @@ class User {
             email,
             user_name,
             user_password,
+            avatar,
         } = model;
 
+        // eslint-disable-next-line new-cap
         const passwordHash = CryptoJS.SHA256(user_password).toString();
 
         return {
             first_name: first_name,
             last_name: last_name,
             date: date,
-            country,
+            country: country,
             email: email,
             user_name: user_name,
             user_password: passwordHash,
+            avatar: avatar,
         };
     }
 

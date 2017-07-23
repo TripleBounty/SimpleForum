@@ -1,5 +1,6 @@
 extends shared/_master
 include forum-post-comment.pug
+include comment.pug
 
 block body
   .container
@@ -27,6 +28,7 @@ block body
             i.glyphicon.glyphicon-comment
             | 
             =post.comments.length
+        +newComment
         ul#comments-list.comments-list
           each comment in post.comments
             li
