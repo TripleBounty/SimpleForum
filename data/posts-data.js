@@ -23,7 +23,7 @@ class Posts extends BaseData {
 
         dbModel.date = this._getDate();
         dbModel.username = user.user_name;
-        dbModel.img = 'https://i.ytimg.com/vi/wJ1pgvSLwc8/maxresdefault.jpg';
+        dbModel.img = user.avatar;
 
         return this.findPostByTitle(model.title)
             .then((post) => {
@@ -39,8 +39,8 @@ class Posts extends BaseData {
     }
 
     _getDate() {
-        const date = new Date().getTime();
-        return date.toString();
+        const date = new Date();
+        return date.toDateString();
     }
 
     updateLikes(postId, like) {

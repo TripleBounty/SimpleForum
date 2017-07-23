@@ -21,6 +21,11 @@ mixin main-navbar(isAutenticated, user)
                             a(href='/api/users/register')
                                 | Register User 
                                 span.sr-only (current)
+                    if isAutenticated
+                        li
+                            a(href='/new-forum-post')
+                                | New Post
+                                span.sr-only (current)
                 ul.nav.navbar-nav.navbar-right
                     li
                         #search-form.navbar-form(role='search')

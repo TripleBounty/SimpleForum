@@ -3,7 +3,7 @@ extends shared/_master
 block body
      each post in posts        
         .container
-            -var postId = post.id            
+            -var postId = post._id            
             .well
                 .media
                     a.pull-left(href='/forum-post/' + postId)

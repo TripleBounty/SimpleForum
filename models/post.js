@@ -6,7 +6,7 @@ class Post {
             date,
             nodes,
             user_name,
-            user_avatar,
+            avatar,
         } = model;
 
         return {
@@ -15,7 +15,7 @@ class Post {
             date: date,
             nodes: 0,
             username: user_name,
-            img: user_avatar,
+            img: avatar,
             comments: [],
         };
     }

@@ -19,7 +19,7 @@ function s4() {
 module.exports = (data) => {
     function getPostById(req, res) {
         const id = req.params.postId;
-
+        console.log(id);
         data.posts.findById(id)
             .then((post) => {
                 console.log(post);
