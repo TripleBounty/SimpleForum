@@ -69,8 +69,37 @@ module.exports = (data) => {
 
         res.render('profile', {
             'user': req.user,
+            'user_profile': req.user,
             'isAutenticated': true,
         });
+    }
+
+    function getUserProfile(req, res) {
+        let isAutenticated = false;
+        let user;
+        if (req.isAuthenticated()) {
+            user = req.user;
+            isAutenticated = true;
+        }
+
+        const username = req.params.username;
+
+        data.users.findByUserName(username)
+            .then((userProfile) => {
+                if (userProfile) {
+                    res.render('profile', {
+                        'user': user,
+                        'user_profile': userProfile,
+                        'isAutenticated': isAutenticated,
+                    });
+                } else {
+                    res.render('profile', {
+                        'user': user,
+                        'user_profile': {},
+                        'isAutenticated': isAutenticated,
+                    });
+                }
+            });
     }
 
     function logout(req, res) {
@@ -126,6 +155,7 @@ module.exports = (data) => {
         login,
         signIn,
         profile,
+        getUserProfile,
         logout,
         uploadAvatar,
     };

@@ -20,7 +20,7 @@ block body
                         |
                         p.text-right by 
                             -var user = post.username
-                            a(href='/forum-user/' + user)
+                            a(href='/api/users/profile/' + user)
                                 =user.toUpperCase()
                         |           
                         -var content = post.content

@@ -5,41 +5,41 @@ block body
     .row
       .col-xs-12.col-sm-3.center
         span.profile-picture
-          img#avatar2.editable.img-responsive(alt='Avatar', src=user.avatar)
+          img#avatar2.editable.img-responsive(alt='Avatar', src=user_profile.avatar)
       .col-xs-12.col-sm-9
         .profile-user-info
           .profile-info-row
             .profile-info-name  Username 
             .profile-info-value
               span
-                =user.user_name
+                =user_profile.user_name
           .profile-info-row
             .profile-info-name  Location 
             .profile-info-value
               span
-                =user.country
+                =user_profile.country
           .profile-info-row
             .profile-info-name  First Name 
             .profile-info-value
               span
-                =user.first_name
+                =user_profile.first_name
           .profile-info-row
             .profile-info-name  Last Name 
             .profile-info-value
               span
-                =user.last_name
+                =user_profile.last_name
           .profile-info-row
             .profile-info-name  Birth Date 
             .profile-info-value
               span
-                =user.date
+                =user_profile.date
           .profile-info-row
             .profile-info-name  Email 
             .profile-info-value
               span
-                =user.email
+                =user_profile.email
           .profile-info-row
             .profile-info-name  Contact No. 
             .profile-info-value
               span
-                =user.contact_no
+                =user_profile.contact_no

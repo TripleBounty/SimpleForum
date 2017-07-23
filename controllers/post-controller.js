@@ -18,12 +18,21 @@ function s4() {
 
 module.exports = (data) => {
     function getPostById(req, res) {
+        let isAutenticated = false;
+        let user;
+        if (req.isAuthenticated()) {
+            user = req.user;
+            isAutenticated = true;
+        }
+
         const id = req.params.postId;
 
         data.posts.findById(id)
             .then((post) => {
                 res.render('forum-post', {
-                    post,
+                    'user': user,
+                    'isAutenticated': isAutenticated,
+                    'post': post,
                 });
             });
     }

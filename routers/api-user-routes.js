@@ -10,6 +10,7 @@ const attach = (app, data) => {
     router.get('/register', userController.registerForm);
     router.post('/register', userController.register);
     router.get('/profile', userController.profile);
+    router.get('/profile/:username', userController.getUserProfile);
     router.get('/logout', userController.logout);
 
     app.use('/api/users/', router);

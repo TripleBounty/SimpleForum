@@ -7,7 +7,7 @@ block body
     form.well
       .media
         a.pull-left(href='#')
-          img.media-object.user-avatar(src=''+ post.img)
+          img.media-object.user-avatar(src= post.img)
         |
         .media-body
           strong.post-head.media-heading
@@ -19,7 +19,7 @@ block body
           p
             i.icon-user
             |  by 
-            a(href='#') 
+            a(href='/api/users/profile/' + post.username) 
               =post.username
             |  
             i.glyphicon.glyphicon-calendar
