@@ -6,10 +6,6 @@ class Posts extends BaseData {
         super(db, Post);
     }
 
-    _isModelValid(model) {
-        return Post.isValid(model);
-    }
-
     findPostByTitle(title) {
         return this.collection.findOne({
             'title': title,
@@ -17,14 +13,17 @@ class Posts extends BaseData {
     }
 
     create(model, user) {
-        if (!this._isModelValid(model)) {
-            return Promise.reject('invalid post data');
+        if (this._isModelValid) {
+            const error = this._isModelValid(model);
+            if (error !== 'no') {
+                return Promise.reject(error);
+            }
         }
-
         const dbModel = this.ModelClass.getDataBaseModel(model);
+
         dbModel.date = this._getDate();
         dbModel.username = user.user_name;
-        dbModel.img = '';
+        dbModel.img = 'https://i.ytimg.com/vi/wJ1pgvSLwc8/maxresdefault.jpg';
 
         return this.findPostByTitle(model.title)
             .then((post) => {
@@ -35,9 +34,13 @@ class Posts extends BaseData {
             });
     }
 
+    _isModelValid(model) {
+        return Post.validate(model);
+    }
+
     _getDate() {
-        const date = new Date();
-        return date.toDateString();
+        const date = new Date().getTime();
+        return date.toString();
     }
 
     updateLikes(postId, like) {

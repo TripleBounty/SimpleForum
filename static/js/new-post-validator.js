@@ -12,6 +12,7 @@ $(document).ready(() => {
                 validators: {
                     stringLength: {
                         min: 3,
+                        max: 64,
                     },
                     notEmpty: {
                         message: 'Please enter a title for your post',
@@ -21,7 +22,7 @@ $(document).ready(() => {
             content: {
                 validators: {
                     stringLength: {
-                        min: 32,
+                        min: 3,
                     },
                     notEmpty: {
                         message: 'Your post should contain at least 128 characters',

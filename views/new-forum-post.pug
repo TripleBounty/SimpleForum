@@ -21,6 +21,10 @@ block body
                 .col-md-4.inputGroupContainer
                     .input-group
                         textarea#inputPostContent.form-control(rows='5' name='content', placeholder='Content', type='text')
+            if inavalid
+                .form-group
+                    label.col-md-6.control-label 
+                    =inavalid
             // Button
             .form-group
                 label.col-md-4.control-label

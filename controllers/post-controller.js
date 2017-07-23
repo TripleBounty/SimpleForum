@@ -22,6 +22,7 @@ module.exports = (data) => {
 
         data.posts.findById(id)
             .then((post) => {
+                console.log(post);
                 res.render('forum-post', {
                     post,
                 });

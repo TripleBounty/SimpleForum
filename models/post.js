@@ -1,9 +1,10 @@
 class Post {
-        static getDataBaseModel(model) {
+    static getDataBaseModel(model) {
         const {
             title,
             content,
             date,
+            nodes,
             user_name,
             user_avatar,
         } = model;
@@ -12,18 +13,49 @@ class Post {
             title: title,
             content: content,
             date: date,
+            nodes: 0,
             username: user_name,
             img: user_avatar,
             comments: [],
         };
     }
 
-    static isValid(model) {
-        return typeof model !== 'undefined' &&
-            typeof model.title === 'string' &&
-            model.title.length > 2 &&
-            typeof model.content === 'string' &&
-            model.content.length > 32;
+    static validate(model) {
+        const {
+            title,
+            content,
+        } = model;
+
+        const error = [];
+
+        this._validateTitleField('title', 3, 64, title, error);
+        this._validateContentTextBox('content', 3, content, error);
+        console.log(error);
+        if (error.length !== 0) {
+            return 'Invalid values';
+        }
+
+        return 'no';
+    }
+
+    static _validateTitleField(name, min, max, field, error) {
+        console.log('title - ' + field.length);
+        if (min > field.length && field.length < max) {
+            error.push({
+                field: name,
+                message: 'Invalid field ${name}',
+            });
+        }
+    }
+
+    static _validateContentTextBox(name, min, field, error) {
+        console.log('content - ' + field.length);
+        if (field.length < min) {
+            error.push({
+                field: name,
+                message: 'Too short ${name}',
+            });
+        }
     }
 
     get id() {
