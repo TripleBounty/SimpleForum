@@ -28,7 +28,7 @@ block body
             i.glyphicon.glyphicon-comment
             | 
             =post.comments.length
-        +newComment
+        +newComment(post._id, 'post')
         ul#comments-list.comments-list
           each comment in post.comments
             li

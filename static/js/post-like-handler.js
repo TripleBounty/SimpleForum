@@ -1,18 +1,14 @@
 /* globals $ */
 const changeingValue = 1;
 
-for (let i= 0; i <200; i++) {
-    if (document.cookie.match(i+'d')) {
-        if (document.getElementById(i+'d')!== null) {
-        document.getElementById(i+'d').classList.add('inactive');
-        }
+$('.set-value-from-cookie').each(function(i, obj) {
+    if (document.cookie.match(obj.id) !== null) {
+        document.getElementById(obj.id).classList.add('inactive');
     }
-    if (document.cookie.match(i+'l')) {
-        if (document.getElementById(i+'l')!== null) {
-        document.getElementById(i+'l').classList.add('inactive');
-        }
+    else {
+        document.getElementById(obj.id).classList.remove('inactive');
     }
-}
+});
 
 $('.likesLink').on('click', (event) => {
     event.preventDefault(); // Stop the form from causing a page refresh.
@@ -31,7 +27,7 @@ $('.likesLink').on('click', (event) => {
         method: 'POST',
     }).then((response) => {
         targetDiv.innerHTML = currentVal + changeingValue;
-        const negativeLike = document.getElementById(postId+'d');
+        const negativeLike = document.getElementById(postId + 'd');
         if (negativeLike.classList.contains('inactive')) {
             negativeLike.classList.remove('inactive');
         } else {
@@ -59,9 +55,10 @@ $('.hatesLink').on('click', (event) => {
         method: 'POST',
     }).then((response) => {
         targetDiv.innerHTML = currentVal - changeingValue;
-        const positiveLike = document.getElementById(postId+'l');
+        const positiveLike = document.getElementById(postId + 'l');
         if (positiveLike.classList.contains('inactive')) {
             positiveLike.classList.remove('inactive');
+            document.cookie.remove();
         } else {
             event.target.classList.add('inactive');
         }

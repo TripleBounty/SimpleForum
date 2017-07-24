@@ -13,15 +13,15 @@ mixin comment(c)
                             i.icon-user
                             |  by 
                             a(href='#') 
-                            =post.username
+                                =c.username
                             |  
                             i.glyphicon.glyphicon-calendar
-                            |  July 7th, 2017
+                                =c.date
                             | 
                             i.glyphicon.glyphicon-comment
                             | 
-                            =post.comments.length
-                    +newComment
+                            |   nestedComment.lenght
+                    +newComment(c._id, 'comment')
                     .row
                         ul.comments-list.reply-list
                             each nestedComment in c.comments

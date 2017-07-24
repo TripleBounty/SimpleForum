@@ -36,6 +36,20 @@ class Posts extends BaseData {
             });
     }
 
+    addCommentId(parentId, id) {
+        this.collection.findById(parentId)
+            .then((post) => {
+                if (post) {
+                    this.collection.update({
+                        _id: new ObjectID(parentId),
+                    }, {
+                            $push: { comments: new ObjectID(id) },
+                        });
+                }
+            });
+        return this;
+    }
+
     _isModelValid(model) {
         return Post.validate(model);
     }
