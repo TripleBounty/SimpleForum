@@ -4,6 +4,7 @@ const attach = (app, data) => {
     const router = new Router();
     const postControler = require('../controllers/post-controller')(data);
     const userControler = require('../controllers/user-controller')(data);
+    // eslint-disable-next-line max-len
     const commentController = require('../controllers/comment-controller')(data);
 
     router.get('/', postControler.getAll);

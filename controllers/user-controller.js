@@ -114,9 +114,8 @@ module.exports = (data) => {
             }
 
             if (!user) {
-                res.json({
-                    success: false,
-                    message: 'Invalid name or password!',
+                res.render('login-form', {
+                    'inavalid': 'Invalid name or password!',
                 });
             }
 

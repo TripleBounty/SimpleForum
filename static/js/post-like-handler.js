@@ -4,8 +4,7 @@ const changeingValue = 1;
 $('.set-value-from-cookie').each(function(i, obj) {
     if (document.cookie.match(obj.id) !== null) {
         document.getElementById(obj.id).classList.add('inactive');
-    }
-    else {
+    } else {
         document.getElementById(obj.id).classList.remove('inactive');
     }
 });

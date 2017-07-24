@@ -13,18 +13,19 @@ const $uploadCrop = $('#upload-img-avatar').croppie({
     },
 });
 
-$('#upload').on('change', function () {
+$('#upload').on('change', function() {
     const reader = new FileReader();
     reader.onload = (e) => {
         $uploadCrop.croppie('bind', {
             url: e.target.result,
         });
     };
+    // eslint-disable-next-line no-invalid-this
     reader.readAsDataURL(this.files[0]);
 });
 
 const $modal = $('#upload-avatar');
-$modal.on('click', '#upload-avatar-OK', function (e) {
+$modal.on('click', '#upload-avatar-OK', function(e) {
     $uploadCrop.croppie('result', {
         type: 'canvas',
         size: 'viewport',

@@ -106,6 +106,7 @@ $(document).ready(() => {
                     },
                     identical: {
                         field: 'user_password',
+                        // eslint-disable-next-line max-len
                         message: 'The password and its confirm are not the same',
                     },
                     notEmpty: {
