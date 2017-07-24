@@ -29,6 +29,13 @@ class User {
         // eslint-disable-next-line new-cap
         const passwordHash = CryptoJS.SHA256(user_password).toString();
 
+        if (type === 'updatePassword') {
+            return {
+                user_name: user_name,
+                user_password: passwordHash,
+            };
+        }
+
         return {
             first_name: first_name,
             last_name: last_name,
@@ -73,6 +80,32 @@ class User {
                     message: 'Invalid password',
                 });
             }
+        }
+
+        if (error.length !== 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    static validatePassword(user) {
+        const {
+            old_password,
+            user_password,
+            confirm_password,
+        } = user;
+
+        const error = [];
+
+
+        if (old_password.length < 8 &&
+            user_password.length < 8 &&
+            user_password.localeCompare(confirm_password) === 0) {
+            error.push({
+                field: 'password',
+                message: 'Invalid password',
+            });
         }
 
         if (error.length !== 0) {

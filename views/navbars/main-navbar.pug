@@ -47,7 +47,7 @@ mixin main-navbar(isAutenticated, user)
                                 span.glyphicon.glyphicon-cog(aria-hidden='true')
                             ul.dropdown-menu
                                 li
-                                    a(href='/') Change Password
+                                    a(href='/api/users/update_password') Change Password
                                 li
                                     a(href='/api/users/update') Personal Settings
                         li#user-name-nav

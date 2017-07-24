@@ -11,6 +11,8 @@ const attach = (app, data) => {
     router.post('/register', userController.register);
     router.get('/update', userController.updateForm);
     router.post('/update', userController.update);
+    router.get('/update_password', userController.updatePasswordForm);
+    router.post('/update_password', userController.updatePassword);
     router.get('/profile', userController.profile);
     router.get('/profile/:username', userController.getUserProfile);
     router.get('/logout', userController.logout);

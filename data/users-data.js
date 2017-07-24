@@ -25,10 +25,6 @@ class Users extends BaseData {
             });
     }
 
-    _isModelValid(model, type) {
-        return User.validate(model, type);
-    }
-
     create(model) {
         if (!this._isModelValid(model, 'create')) {
             return Promise.reject('Invalid input data');
@@ -70,6 +66,43 @@ class Users extends BaseData {
             .catch(() => {
                 return Promise.reject('Invalid input data');
             });
+    }
+
+    updatePassword(model) {
+        if (!this._isPasswordValid(model)) {
+            return Promise.reject('Invalid input data');
+        }
+
+        const dbModel = this.ModelClass
+            .getDataBaseModel(model, 'updatePassword');
+
+        return this.findByUserName(model.user_name)
+            .then((user) => {
+                if (!user) {
+                    return Promise.reject('User do not exist');
+                }
+
+                // eslint-disable-next-line new-cap, max-len
+                const passwordHash = CryptoJS.SHA256(model.old_password).toString();
+
+                if (passwordHash !== user.user_password) {
+                    return Promise.reject('Incorrect old password');
+                }
+
+                return this.collection.update({
+                    _id: user._id,
+                }, {
+                        $set: dbModel,
+                    });
+            });
+    }
+
+    _isModelValid(model, type) {
+        return User.validate(model, type);
+    }
+
+    _isPasswordValid(model) {
+        return User.validatePassword(model);
     }
 }
 

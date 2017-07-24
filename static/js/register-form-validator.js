@@ -71,6 +71,20 @@ $(document).ready(() => {
                     },
                 },
             },
+            old_password: {
+                validators: {
+                    stringLength: {
+                        min: 8,
+                    },
+                    different: {
+                        field: 'user_name',
+                        message: 'The password cannot be the same as username',
+                    },
+                    notEmpty: {
+                        message: 'Please enter your Password',
+                    },
+                },
+            },
             user_password: {
                 validators: {
                     stringLength: {

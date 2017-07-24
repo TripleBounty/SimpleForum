@@ -71,6 +71,37 @@ module.exports = (data) => {
             });
     }
 
+    function updatePasswordForm(req, res) {
+        if (!req.isAuthenticated()) {
+            res.status(401).redirect('/api/users/login');
+        }
+
+        res.render('update-password-form', {
+            'user': req.user,
+            'isAutenticated': true,
+        });
+    }
+
+    function updatePassword(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.status(401).redirect('/api/users/login');
+        }
+
+        const body = req.body;
+
+        data.users.updatePassword(body)
+            .then(() => {
+                res.redirect('/api/users/profile');
+            })
+            .catch((error) => {
+                res.render('update-password-form', {
+                    'inavalid': error,
+                    'user': req.user,
+                    'isAutenticated': true,
+                });
+            });
+    }
+
     function login(req, res) {
         res.render('login-form');
     }
@@ -194,6 +225,8 @@ module.exports = (data) => {
         registerForm,
         update,
         updateForm,
+        updatePassword,
+        updatePasswordForm,
         login,
         signIn,
         profile,
