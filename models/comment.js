@@ -4,14 +4,16 @@ class Comment {
             message,
             date,
             user_name,
-            user_avatar,
+            avatar,
         } = model;
 
         return {
-            message: message,
+            message: message[0],
+            postId: message[1],
+            parandId: message[2],
             date: date,
             username: user_name,
-            img: user_avatar,
+            img: avatar,
             comments: [],
         };
     }

@@ -1,11 +1,11 @@
-mixin newComment(parentId,type)
+mixin newComment(postId,parentId,type)
     .container
       a.btn.btn-primary.btnComment
         i.glyphicon.glyphicon-pencil
         |  Comment
       .row.visibleHiddnen
         .col-md-6.col-md-offset-3
-          form.facebook-share-box(action= '#', method= 'post', role= 'form', enctype= 'multipart/form-data').commentPostBody
+          form.facebook-share-box().commentPostBody
             .share
               .arrow
               .panel.panel-default
@@ -14,20 +14,18 @@ mixin newComment(parentId,type)
                   |  Add a Comment
                 .panel-body
                   div
-                    input#status_message.form-control.message(name='message', cols='40', rows='10', style='height: 62px; overflow: hidden;', placeholder="What's on your mind ?")
+                    input#status_message.form-control.message(name='', cols='40', rows='10', style='height: 62px; overflow: hidden;', placeholder="What's on your mind ?")
+                    input(type= 'hidden', name='postId', value=postN)
+                    input(type= 'hidden', name='parandId', value=parentId)
+                    input(type= 'hidden', name='type', value=type)
                 .panel-footer
                   .row
                     .col-md-7
                       .form-group
                         .btn-group
-                          input(type= 'file', name= 'pic', accept= 'image/*')
-                          input(type= 'hidden', name='parandId', value=parentId)
-                          input(type= 'hidden', name='type', value=type)
                     .col-md-5
-                      .form-group
-                        
-                        button.btn.btn-primary(type="submit" formmethod="post" formaction="/comment").postBut
+                      .form-group                        
+                        button.btn.btn-primary(type="submit" formmethod="" formaction="/comment").postBut
                             |SUBMIT
                             span.glyphicon.glyphicon-send
-    script(src= '/static/js/comments-handler.js')
-    
+    script(src= '/static/js/comments-handler.js')  

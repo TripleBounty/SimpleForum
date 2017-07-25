@@ -3,6 +3,7 @@ include forum-post-comment.pug
 include comment.pug
 
 block body
+  -var postN = post._id;
   .container
     form.well
       .media
@@ -28,8 +29,8 @@ block body
             i.glyphicon.glyphicon-comment
             | 
             =post.comments.length
-        +newComment(post._id, 'post')
+        +newComment(post._id, post._id, 'post')
         ul#comments-list.comments-list
           each comment in post.comments
             li
-              +comment(comment)
+              +comment(comment, post._id)
