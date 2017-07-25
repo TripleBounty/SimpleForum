@@ -18,6 +18,8 @@ block body
                         else    
                             h3.media-heading=substrTitle.toUpperCase()
                         |
+                        a.pull-right(href='#')
+                            img.media-object.user-avatar(src= post.img)
                         p.text-right by 
                             -var user = post.username
                             a(href='/api/users/profile/' + user)
@@ -36,7 +38,7 @@ block body
                   li
                     span
                       i.glyphicon.glyphicon-calendar
-                      |  2 days, 8 hours
+                      =post.date
                   |             
                   li |
                   |             

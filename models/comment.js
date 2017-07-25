@@ -1,5 +1,5 @@
 class Comment {
-        static getDataBaseModel(model) {
+    static getDataBaseModel(model) {
         const {
             message,
             date,
@@ -17,7 +17,23 @@ class Comment {
             comments: [],
         };
     }
-static toViewModel(model) {
+
+    static validate(model) {
+        const {
+            message,
+        } = model;
+
+        const error = [];
+
+        this._validateMessageField('message', 2, 2000, message, error);
+        if (error.length !== 0) {
+            return 'Invalid values';
+        }
+
+        return 'Please fill the field ';
+    }
+
+    static toViewModel(model) {
         const viewModel = new Comment();
 
         Object.keys(model)

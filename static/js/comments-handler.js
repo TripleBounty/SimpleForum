@@ -16,4 +16,30 @@ $(document).ready(() => {
             console.error(err);
         });
     });
+
+    const firstnameMessage = 'The comment can only consist of alphabetical, number, dot and underscore';
+
+    $('#status_message').bootstrapValidator({
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh',
+        },
+        fields: {
+            message: {
+                validators: {
+                    stringLength: {
+                        min: 2,
+                    },
+                    notEmpty: {
+                        message: 'The country is required and can\'t be empty',
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: firstnameMessage,
+                    },
+                },
+            },
+        },
+    });
 });

@@ -14,7 +14,7 @@ mixin newComment(postId,parentId,type)
                   |  Add a Comment
                 .panel-body
                   div
-                    input#status_message.form-control.message(name='', cols='40', rows='10', style='height: 62px; overflow: hidden;', placeholder="What's on your mind ?")
+                    input#status_message.form-control.message(name='', cols='40', rows='10', style='height: 62px; overflow: hidden;', placeholder="What's on your mind ?" required)
                     input(type= 'hidden', name='postId', value=postN)
                     input(type= 'hidden', name='parandId', value=parentId)
                     input(type= 'hidden', name='type', value=type)
