@@ -1,0 +1,20 @@
+extends shared/_master
+block scripts
+  script(src='/libs/handlebars/dist/handlebars.min.js')
+
+
+block body
+  .container
+    .col-md-8
+      .panel.panel-info
+        .panel-heading
+          | Chat Room
+        .panel-body
+          ul#message-container.media-list
+        .panel-footer
+          .input-group
+            input#message.form-control(type='text', placeholder='Enter Message')
+            span.input-group-btn
+              button#send.btn.btn-info(type='button') SEND
+  script(src='/static/js/chat.js')
+  script(src='/libs/socket.io-client/dist/socket.io.js')

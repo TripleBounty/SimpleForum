@@ -9,6 +9,7 @@ gulp.task('server', () => {
         .then((db) => require('./data')(db))
         .then((data) => require('./app/index')(data))
         .then((app) => {
-            app.listen(port, () => console.log(`Server is running at http://localhost:${port}`));
-        });
+            return Promise.resolve(app.listen(port, () => console.log(`Server is running at http://localhost:${port}`)));
+        })
+        .then((server) => require('./app/config/socket-io/socket-io')(server));
 });
