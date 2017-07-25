@@ -138,3 +138,6 @@ body {
     box-sizing: border-box;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .15)
 }
+.comment-message{
+    padding: 4px;
+}

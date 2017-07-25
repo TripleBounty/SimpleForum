@@ -1,27 +1,29 @@
 include comment.pug
 
-mixin comment(c)
+mixin comment(c, p)
     .media
         div.comment-avatar.pull-left
-            img.media-object.user-avatar(src='https://img-9gag-fun.9cache.com/photo/av7nywW_700b.jpg')
+            img.media-object.user-avatar(src=c.img)
             |
+            h3.media-heading=c.username.toUpperCase()
+            |  said :
             .media-body
                 div.comment-box
                     div.comment-content
-                        =c.content
+                        h4.media-heading=c.message
                         div.comment-footer
                             i.icon-user
                             |  by 
-                            a(href='#') 
+                            a(href="/api/users/profile/" + c.username) 
                                 =c.username
                             |  
                             i.glyphicon.glyphicon-calendar
                                 =c.date
                             | 
                             i.glyphicon.glyphicon-comment
+                                =c.comments.length
                             | 
-                            |   nestedComment.lenght
-                    +newComment(c._id, 'comment')
+                    +newComment(p, c._id, 'comment')
                     .row
                         ul.comments-list.reply-list
                             each nestedComment in c.comments

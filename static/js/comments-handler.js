@@ -10,6 +10,8 @@ $(document).ready(() => {
         }).then((response) => {
             const element = event3.target;
             $(element).next().removeClass('visibleHiddnen');
+            $(element).next().find( 'input' ).attr('name', 'message');
+            $(element).next().find('button').attr('formmethod', 'post');
         }).catch((err) => {
             console.error(err);
         });
