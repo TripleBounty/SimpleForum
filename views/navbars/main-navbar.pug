@@ -26,6 +26,10 @@ mixin main-navbar(isAutenticated, user)
                             a(href='/new-forum-post')
                                 | New Post
                                 span.sr-only (current)
+                        li
+                            a(href='/chat-room')
+                                | Chat Room
+                                span.sr-only (current)
                 ul.nav.navbar-nav.navbar-right
                     li
                         #search-form.navbar-form(role='search')
