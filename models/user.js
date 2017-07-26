@@ -46,6 +46,7 @@ class User {
             user_password: passwordHash,
             avatar: avatar,
             contact_no: contact_no,
+            comments: [],
         };
     }
 

@@ -30,11 +30,11 @@ module.exports = (data) => {
         if (!req.isAuthenticated()) {
             res.status(401).redirect('/api/users/login');
         }
-        //console.log(req.body);
+        const postLink = req.body.message[1];
         //console.log(req.user);
         data.comments.create(req.body, req.user, value)
             .then(() => {
-                 res.redirect('/');})
+                 res.redirect('/forum-post/' + postLink);})
              .catch((error) => {
                  res.render('comment', { inavalid: error });
              });

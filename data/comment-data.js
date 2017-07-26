@@ -6,6 +6,7 @@ class Comments extends BaseData {
     constructor(db) {
         super(db, Comment);
         this.collection = this.db.collection("posts");
+        this.usersCollection = this.db.collection("users");
     }
 
     _isModelValid(model) {
@@ -21,6 +22,8 @@ class Comments extends BaseData {
         const parentId = dbModel.parandId;
         const postId = dbModel.postId;
         let modelNest;
+
+        //console.log(user);
   
         //console.log('stigam do data');
         if (dbModel.postId == dbModel.parandId) {
@@ -28,7 +31,13 @@ class Comments extends BaseData {
                 _id: new ObjectID(dbModel.parandId),
             }, {
                     $push: { comments: dbModel },
-                });
+                }) &&
+                this.usersCollection.update({
+                        user_name: dbModel.username,
+                    }, {
+                            $push: { comments: dbModel },
+                        })
+                ;
         } else {
             let postObject;
             return this.collection.findOne({
@@ -53,7 +62,12 @@ class Comments extends BaseData {
                 
                 //console.log("predi dfs");
                 dfs(postComments);
-                    return this.collection.update({
+                    return this.usersCollection.update({
+                        user_name: dbModel.username,
+                    }, {
+                            $push: { comments: dbModel },
+                        }) &&
+                        this.collection.update({
                         _id: new ObjectID(dbModel.postId),
                     }, {
                             $set: { comments: modelNest },
