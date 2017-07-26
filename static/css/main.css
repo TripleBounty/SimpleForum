@@ -74,7 +74,7 @@ body {
 }
 
 
-/* start */
+/* start profile css */
 
 .profile-user-info {
     display: table;
@@ -138,6 +138,15 @@ body {
     box-sizing: border-box;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .15)
 }
-.comment-message{
+
+.comment-message {
     padding: 4px;
+}
+
+
+/* end profile css */
+
+#chatroom-body {
+    height: 350px;
+    overflow-y: auto;
 }

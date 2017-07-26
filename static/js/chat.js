@@ -1,20 +1,31 @@
 /* globals $, io */
 const handlebars = window.handlebars || window.Handlebars;
 
-window.onload = function() {
+$(window).on('load', () => {
     const socket = io.connect('http://localhost:3000');
     const messageField = $('#message');
     const messageContainer = $('#message-container');
+    const button = $('#send');
+    const body = $('#chatroom-body');
 
     socket.on('message', (data) => {
         get('chat-message')
             .then((template) => {
                 data.date = new Date().toLocaleString();
                 messageContainer.append(template(data));
+                body.scrollTop(messageContainer.height());
             });
     });
 
-    $('#send').on('click', () => {
+    messageField.on('keypress', (e) => {
+        if (e.keyCode === 13) {
+            button.trigger('click');
+            return false;
+        }
+        return true;
+    });
+
+    button.on('click', () => {
         const text = messageField.val();
         if (text) {
             socket.emit('send', {
@@ -23,7 +34,11 @@ window.onload = function() {
         }
         messageField.val('');
     });
-};
+
+    $(window).on('unload', () => {
+        socket.emit('disconecte', {});
+    });
+});
 
 function get(name) {
     const promise = new Promise((resolve, reject) => {

@@ -9,11 +9,11 @@ block body
       .panel.panel-info
         .panel-heading
           | Chat Room
-        .panel-body
+        .panel-body#chatroom-body
           ul#message-container.media-list
         .panel-footer
           .input-group
-            input#message.form-control(type='text', placeholder='Enter Message')
+            input#message.form-control(type='text', placeholder='Enter Message', autocomplete='off')
             span.input-group-btn
               button#send.btn.btn-info(type='button') SEND
   script(src='/static/js/chat.js')

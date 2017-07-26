@@ -45,5 +45,14 @@ module.exports = (server) => {
             };
             io.sockets.emit('message', message);
         });
+
+        socket.on('disconecte', () => {
+            const message = {
+                username: user.user_name,
+                avatar: user.avatar,
+                message: 'is now offline',
+            };
+            io.sockets.emit('message', message);
+        });
     });
 };
