@@ -1,17 +1,24 @@
 const getRequestMock = (options = {}) => {
-    const req = {};
+    const req = {
+        isAuthenticated: false,
+        logout() {
+            this.isAuthenticated = false;
+        },
+    };
 
     Object.keys(options)
         .forEach((key) => {
             req[key] = options[key];
         });
-    return options;
+    return req;
 };
 
 const getResponseMock = () => {
     return {
         viewName: '',
         model: null,
+        context: {},
+        redirectUrl: '',
         render(viewName, context) {
             this.viewName = viewName;
             this.context = context;

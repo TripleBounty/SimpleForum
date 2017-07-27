@@ -180,7 +180,7 @@ module.exports = (data) => {
 
     function logout(req, res) {
         req.logout();
-        res.status(200).redirect('/');
+        res.redirect('/');
     }
 
     function uploadAvatar(req, res) {
