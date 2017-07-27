@@ -206,3 +206,4 @@ package-lock.json
 yarn.lock
 app/config/env-configs/
 .vscode/
+coverage
