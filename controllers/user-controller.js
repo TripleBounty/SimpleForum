@@ -146,6 +146,7 @@ module.exports = (data) => {
             'user': req.user,
             'user_profile': req.user,
             'isAutenticated': true,
+            'showComment': true,
         });
     }
 

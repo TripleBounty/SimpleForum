@@ -43,25 +43,21 @@ block body
             .profile-info-value
               span
                 =user_profile.contact_no
-                | 
-        h3.media-heading
-          | My Forum Activity   
-          i.glyphicon.glyphicon-comment
-          | 
-          =user_profile.comments.length
-        ul#comments-list.comments-list
-        each comment in user_profile.comments
-          li.profile-info-row
-            .media
-              div.comment-avatar.pull-left
-                img.media-object.user-avatar(src=user_profile.avatar)
-                |
-                h3.media-heading=user_profile.username
-                |  said :
-                .media-body
-                  div.comment-box
-                    div.comment-content
-                      h4.media-heading=comment.message
-                      div.comment-footer
-                          i.icon-user
-                          =comment.date
+  if showComment
+    .container.well#comment-container
+      h4.media-heading
+        | My Forum Activity   
+        i.glyphicon.glyphicon-comment
+        | 
+        =user_profile.comments.length
+      ul#comments-list.comments-list
+      each comment in user_profile.comments
+        li.profile-info-row
+          .media
+            .media-body
+              div.comment-box
+                div.comment-content
+                  h4.media-heading=comment.message
+                  div.comment-footer
+                      i.icon-user
+                      =comment.date

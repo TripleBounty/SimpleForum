@@ -150,3 +150,8 @@ body {
     height: 350px;
     overflow-y: auto;
 }
+
+#comment-container {
+    height: 350px;
+    overflow-y: auto;
+}
