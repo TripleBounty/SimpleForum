@@ -1,6 +1,15 @@
-const { expect } = require('chai');
+const chai = require("chai");
+const sinon = require("sinon");
+const sinonChai = require("sinon-chai");
+const expect = chai.expect;
+chai.use(sinonChai);
+
 const { getRequestMock, getResponseMock } = require('../mocks/req_res');
-const data = {};
+const data = {
+    countries: {
+        getAll() { },
+    },
+};
 const controller = require('../../../controllers/user-controller')(data);
 
 describe('User controller tests', () => {
@@ -38,6 +47,42 @@ describe('User controller tests', () => {
         it('Logout should redirect to home page', () => {
             controller.logout(req, res);
             expect(res.redirectUrl).to.be.equal('/');
+        });
+    });
+
+    describe('RegisterForm tests', () => {
+        const countries = {
+            bulgaria: 'bulgaria',
+            germany: 'germany',
+        };
+
+        let getAllStub;
+        beforeEach(() => {
+            getAllStub = sinon.stub(data.countries, 'getAll');
+            getAllStub.returns(Promise.resolve(countries));
+        });
+
+        afterEach(() => {
+            getAllStub.restore();
+        });
+
+        it('Register form should call data.countries.getAll', () => {
+            controller.registerForm(req, res);
+            expect(getAllStub).to.have.been.calledOnce;
+        });
+
+        it('Register form should render register-form template', () => {
+            controller.registerForm(req, res)
+                .then(() => {
+                    expect(res.viewName).to.be.equal('register-form');
+                });
+        });
+
+        it('Register form should render register-form template with countries context', () => {
+            controller.registerForm(req, res)
+                .then(() => {
+                    expect(res.context).to.be.deep.equal({ countries });
+                });
         });
     });
 });

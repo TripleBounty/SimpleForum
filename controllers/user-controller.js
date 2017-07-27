@@ -6,7 +6,7 @@ const bucketConfig = require('../app/config/env-configs/bucket-config');
 
 module.exports = (data) => {
     function registerForm(req, res) {
-        data.countries.getAll()
+        return data.countries.getAll()
             .then((countries) => {
                 res.render('register-form', { countries });
             });
