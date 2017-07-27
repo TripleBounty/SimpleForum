@@ -2,6 +2,17 @@ extends shared/_master
 include forum-post-comment.pug
 include comment.pug
 
+block meta
+  meta(property='og:url', content='localhots:3000/forum-post/' + post._id)
+  meta(property='og:type', content='article')
+  meta(property='og:title', content='' + post.title)
+  meta(property='og:description', content='' + post.content)
+  meta(property='og:image', content='' + post.img)
+block scripts
+  script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js')
+  script(src='/libs/croppie/croppie.js')
+  link(rel='stylesheet', href='/libs/croppie/croppie.css')
+
 block body
   -var postN = post._id;
   .container

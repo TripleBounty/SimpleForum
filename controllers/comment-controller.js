@@ -29,9 +29,10 @@ module.exports = (data) => {
             res.status(401).redirect('/api/users/login');
             return;
         }
+        const postLink = req.body.message[1];
         data.comments.create(req.body, req.user, value)
             .then(() => {
-                res.redirect('/');
+                res.redirect('/forum-post/' + postLink);
             })
             .catch((error) => {
                 res.render('comment', { inavalid: error });

@@ -19,7 +19,7 @@ $(document).ready(() => {
 
     const firstnameMessage = 'The comment can only consist of alphabetical, number, dot and underscore';
 
-    $('#status_message').bootstrapValidator({
+    $('.share').bootstrapValidator({
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
