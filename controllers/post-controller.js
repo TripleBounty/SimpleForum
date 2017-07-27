@@ -68,13 +68,19 @@ module.exports = (data) => {
     function newPostForm(req, res) {
         if (!req.isAuthenticated()) {
             res.status(401).redirect('/api/users/login');
+            return;
         }
-        res.render('new-forum-post');
+
+        res.render('new-forum-post', {
+            user: req.user,
+            isAutenticated: true,
+        });
     }
 
     function newPost(req, res) {
         if (!req.isAuthenticated()) {
             res.status(401).redirect('/api/users/login');
+            return;
         }
 
         data.posts.create(req.body, req.user)

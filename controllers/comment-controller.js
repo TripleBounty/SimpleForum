@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
-// const { ObjectID } = require('mongodb');
 
 function guid() {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
@@ -25,19 +24,18 @@ module.exports = (data) => {
             });
     }
 
-    
     function newComment(req, res) {
         if (!req.isAuthenticated()) {
             res.status(401).redirect('/api/users/login');
+            return;
         }
-        //console.log(req.body);
-        //console.log(req.user);
         data.comments.create(req.body, req.user, value)
             .then(() => {
-                 res.redirect('/');})
-             .catch((error) => {
-                 res.render('comment', { inavalid: error });
-             });
+                res.redirect('/');
+            })
+            .catch((error) => {
+                res.render('comment', { inavalid: error });
+            });
     }
 
     return {

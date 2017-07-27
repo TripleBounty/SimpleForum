@@ -34,6 +34,7 @@ module.exports = (data) => {
     function updateForm(req, res) {
         if (!req.isAuthenticated()) {
             res.status(401).redirect('/api/users/login');
+            return;
         }
 
         data.countries.getAll()
@@ -49,6 +50,7 @@ module.exports = (data) => {
     function update(req, res, next) {
         if (!req.isAuthenticated()) {
             res.status(401).redirect('/api/users/login');
+            return;
         }
 
         const body = req.body;
@@ -74,6 +76,7 @@ module.exports = (data) => {
     function updatePasswordForm(req, res) {
         if (!req.isAuthenticated()) {
             res.status(401).redirect('/api/users/login');
+            return;
         }
 
         res.render('update-password-form', {
@@ -85,6 +88,7 @@ module.exports = (data) => {
     function updatePassword(req, res, next) {
         if (!req.isAuthenticated()) {
             res.status(401).redirect('/api/users/login');
+            return;
         }
 
         const body = req.body;
@@ -103,7 +107,7 @@ module.exports = (data) => {
     }
 
     function login(req, res) {
-        res.render('login-form');
+        res.render('login-form', { 'isAutenticated': false });
     }
 
     function signIn(req, res, next) {
@@ -135,6 +139,7 @@ module.exports = (data) => {
     function profile(req, res) {
         if (!req.isAuthenticated()) {
             res.status(401).redirect('/api/users/login');
+            return;
         }
 
         res.render('profile', {

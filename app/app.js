@@ -13,7 +13,9 @@ module.exports = (data) => {
 
     require('./config/app/app-config')(app);
     require('./config/passport/passport-config')(app, data);
-    require('../routers')(app, data);
+
+    const controllers = require('../controllers')(data);
+    require('../routers')(app, controllers);
 
     return Promise.resolve(app);
 };

@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
-const attach = (app, data) => {
-    const userController = require('../controllers/user-controller')(data);
+const attach = (app, controllers) => {
+    const userController = controllers.userController;
 
     const router = new Router();
 
