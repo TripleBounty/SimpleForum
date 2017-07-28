@@ -2,9 +2,8 @@
 
 const passport = require('passport');
 const AWS = require('aws-sdk');
-const bucketConfig = require('../app/config/env-configs/bucket-config');
 
-module.exports = (data) => {
+module.exports = (data, bucketConfig) => {
     function registerForm(req, res) {
         return data.countries.getAll()
             .then((countries) => {

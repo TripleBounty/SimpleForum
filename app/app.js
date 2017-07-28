@@ -1,4 +1,4 @@
-module.exports = (data) => {
+module.exports = (data, optionalConfig) => {
     const express = require('express');
     const app = express();
 
@@ -14,7 +14,7 @@ module.exports = (data) => {
     require('./config/app/app-config')(app);
     require('./config/passport/passport-config')(app, data);
 
-    const controllers = require('../controllers')(data);
+    const controllers = require('../controllers')(data, optionalConfig);
     require('../routers')(app, controllers);
 
     return Promise.resolve(app);

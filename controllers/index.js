@@ -1,5 +1,5 @@
-module.exports = (data) => {
-    const userController = require('./user-controller')(data);
+module.exports = (data, optionalConfig) => {
+    const userController = require('./user-controller')(data, optionalConfig);
     const postController = require('./post-controller')(data);
     const commentController = require('./comment-controller')(data);
     const chatController = require('./chat-room-controller')(data);
