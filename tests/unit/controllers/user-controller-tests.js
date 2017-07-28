@@ -39,9 +39,9 @@ describe('User controller tests', () => {
 
     describe('logout tests', () => {
         it('Logout should call logout of the request', () => {
-            req.isAuthenticated = true;
+            req._isAuthenticated = true;
             controller.logout(req, res);
-            expect(req.isAuthenticated).to.be.equal(false);
+            expect(req.isAuthenticated()).to.be.equal(false);
         });
 
         it('Logout should redirect to home page', () => {
@@ -71,18 +71,38 @@ describe('User controller tests', () => {
             expect(getAllStub).to.have.been.calledOnce;
         });
 
-        it('Register form should render register-form template', () => {
+        it('Register form should render register-form template', (done) => {
             controller.registerForm(req, res)
                 .then(() => {
                     expect(res.viewName).to.be.equal('register-form');
+                    done();
+                })
+                .catch((error) => {
+                    done(error);
                 });
         });
 
-        it('Register form should render register-form template with countries context', () => {
+        // eslint-disable-next-line max-len
+        it('Register form should render register-form template with countries context', (done) => {
             controller.registerForm(req, res)
                 .then(() => {
                     expect(res.context).to.be.deep.equal({ countries });
+                    done();
+                })
+                .catch((error) => {
+                    done(error);
                 });
+        });
+    });
+
+    describe('Register tests', () => {
+
+    });
+
+    describe('Update form tests', () => {
+        it('if user is not autenticated server should redirect to /api/users/login', () => {
+            controller.updateForm(req, res);
+            expect(res.redirectUrl).to.be.equal('/api/users/login');
         });
     });
 });
