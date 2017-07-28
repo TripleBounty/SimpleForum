@@ -5,8 +5,8 @@ const { ObjectID } = require('mongodb');
 class Comments extends BaseData {
     constructor(db) {
         super(db, Comment);
-        this.collection = this.db.collection("posts");
-        this.usersCollection = this.db.collection("users");
+        this.collection = this.db.collection('posts');
+        this.usersCollection = this.db.collection('users');
     }
 
     _isModelValid(model) {
@@ -20,12 +20,8 @@ class Comments extends BaseData {
         dbModel.img = user.avatar;
         dbModel._id = new ObjectID();
         const parentId = dbModel.parandId;
-        const postId = dbModel.postId;
         let modelNest;
-
-        //console.log(user);
-  
-        //console.log('stigam do data');
+        // eslint-disable-next-line eqeqeq
         if (dbModel.postId == dbModel.parandId) {
             return this.collection.update({
                 _id: new ObjectID(dbModel.parandId),
@@ -38,29 +34,29 @@ class Comments extends BaseData {
                             $push: { comments: dbModel },
                         })
                 ;
+        // eslint-disable-next-line no-else-return
         } else {
-            let postObject;
             return this.collection.findOne({
                 _id: new ObjectID(dbModel.postId),
             })
                 .then((post) => {
-                    //console.log(post);
                     const postComments = post.comments;
 
-                    function dfs(array) { 
-                    array.forEach(function (element) {
+                    function dfs(array) {
+                    array.forEach(function(element) {
                         dfs(element.comments);
+                       // eslint-disable-next-line eqeqeq
                         if (element._id == parentId) {
-                            //console.log(element.message);
                             element.comments.push(dbModel);
-                            return modelNest = post.comments;
+                            modelNest = post.comments;
+                            return modelNest;
+                        // eslint-disable-next-line no-else-return
                         } else {
+                        // eslint-disable-next-line consistent-return
                             return;
-                        }            
+                        }
                     });
-                };
-                
-                //console.log("predi dfs");
+                }
                 dfs(postComments);
                     return this.usersCollection.update({
                         user_name: dbModel.username,

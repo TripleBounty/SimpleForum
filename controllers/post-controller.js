@@ -43,7 +43,7 @@ module.exports = (data) => {
             user = req.user;
             isAutenticated = true;
         }
-        data.posts.getAll()
+        data.posts.getAllSortedByDate()
             .then((posts) => {
                 res.cookie(value, 'session', { maxAge: 9999 });
                 res.render('home', {

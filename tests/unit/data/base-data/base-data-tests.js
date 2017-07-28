@@ -16,6 +16,9 @@ describe('Base-data tests', () => {
             name: '',
             find() {
                 return {
+                    toArray() {
+                        return Promise.resolve(items);
+                    },
                     sort(constraint) {
                         return {
                             toArray() {
@@ -83,6 +86,19 @@ describe('Base-data tests', () => {
             const expected = [1, 2, 3, 4];
             items.push(...expected);
             baseData.getAll()
+                .then((data) => {
+                    expect(data).to.be.deep.equal(expected);
+                    done();
+                })
+                .catch((error) => {
+                    done(error);
+                });
+        });
+
+        it('getAllSortedByDate should return collection data', (done) => {
+            const expected = [1, 2, 3, 4];
+            items.push(...expected);
+            baseData.getAllSortedByDate()
                 .then((data) => {
                     expect(data.sorted).to.be.equal(true);
                     expect(data.items).to.be.deep.equal(expected);

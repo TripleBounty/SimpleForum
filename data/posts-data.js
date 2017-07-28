@@ -71,17 +71,6 @@ class Posts extends BaseData {
                     });
             });
     }
-
-    addComment(comments, postId, parentId) {
-        return this.findById(id)
-            .then((post) => {
-                db.collection.comments.insert({
-                    _id: new ObjectID(id),
-                }, {
-                        message: "pruc",
-                    });
-            });
-    }
 }
 
 module.exports = Posts;
