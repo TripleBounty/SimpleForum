@@ -9,7 +9,7 @@ class BaseData {
     }
 
     getAll() {
-        return this.collection.find().sort({date: -1}).toArray();
+        return this.collection.find().sort({ date: -1 }).toArray();
     }
 
     findById(id) {
