@@ -1,6 +1,6 @@
-const chai = require("chai");
-const sinon = require("sinon");
-const sinonChai = require("sinon-chai");
+const chai = require('chai');
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -13,6 +13,7 @@ const data = {
         create() { },
         update() { },
         updatePassword() { },
+        findByUserName() { },
     },
 };
 const controller = require('../../../controllers/user-controller')(data);
@@ -44,7 +45,7 @@ describe('User controller tests', () => {
 
     describe('logout tests', () => {
         it('Logout should call logout of the request', () => {
-            req._isAuthenticated = true;
+            req.login({ user_name: 'myUserName' });
             controller.logout(req, res);
             expect(req.isAuthenticated()).to.be.equal(false);
         });
@@ -169,8 +170,7 @@ describe('User controller tests', () => {
 
         // eslint-disable-next-line max-len
         it('should render update-form template if user is autenticated', (done) => {
-            req._isAuthenticated = true;
-            req.user = user;
+            req.login({ user_name: 'myUserName' });
             controller.updateForm(req, res)
                 .then(() => {
                     expect(res.viewName).to.be.equal('update-form');
@@ -183,8 +183,7 @@ describe('User controller tests', () => {
 
         // eslint-disable-next-line max-len
         it('should render update-form template if user is autenticated with correct countries context', (done) => {
-            req._isAuthenticated = true;
-            req.user = user;
+            req.login(user);
             controller.updateForm(req, res)
                 .then(() => {
                     expect(res.context.countries).to.be.deep.equal(countries);
@@ -197,8 +196,7 @@ describe('User controller tests', () => {
 
         // eslint-disable-next-line max-len
         it('should render update-form template if user is autenticated with correct user context', (done) => {
-            req._isAuthenticated = true;
-            req.user = user;
+            req.login(user);
             controller.updateForm(req, res)
                 .then(() => {
                     expect(res.context.user).to.be.equal(user);
@@ -211,7 +209,7 @@ describe('User controller tests', () => {
 
         // eslint-disable-next-line max-len
         it('should render update-form template if user is autenticated with correct isAuteticated context', (done) => {
-            req._isAuthenticated = true;
+            req.login({ user_name: 'myUserName' });
             req.user = user;
             controller.updateForm(req, res)
                 .then(() => {
@@ -231,7 +229,7 @@ describe('User controller tests', () => {
         });
 
         it('Should call data users update', (done) => {
-            req._isAuthenticated = true;
+            req.login({ user_name: 'myUserName' });
             const stubUpdate = sinon.stub(data.users, 'update')
                 .returns(Promise.resolve());
             controller.update(req, res)
@@ -248,10 +246,7 @@ describe('User controller tests', () => {
         });
 
         it('Should call data users update with request body', (done) => {
-            req._isAuthenticated = true;
-            req.user = {
-                user_name: 'MyUserName',
-            };
+            req.login({ user_name: 'myUserName' });
 
             const expectedParam = {
                 user_name: 'MyUserName',
@@ -276,7 +271,7 @@ describe('User controller tests', () => {
         });
 
         it('Should redirect to /api/users/profile after update', (done) => {
-            req._isAuthenticated = true;
+            req.login({ user_name: 'myUserName' });
             const stubUpdate = sinon.stub(data.users, 'update')
                 .returns(Promise.resolve());
             controller.update(req, res)
@@ -292,7 +287,7 @@ describe('User controller tests', () => {
         });
 
         it('Should render update-form with error', (done) => {
-            req._isAuthenticated = true;
+            req.login({ user_name: 'myUserName' });
             const err = 'MyError';
             const stubUpdate = sinon.stub(data.users, 'update')
                 .returns(Promise.reject(err));
@@ -321,8 +316,7 @@ describe('User controller tests', () => {
 
         // eslint-disable-next-line max-len
         it('Should render update-form with countries, user and authenticated true', (done) => {
-            req._isAuthenticated = true;
-            req.user = 'MyUser';
+            req.login({ user_name: 'myUserName' });
             const err = 'MyError';
             const stubUpdate = sinon.stub(data.users, 'update')
                 .returns(Promise.reject(err));
@@ -364,20 +358,16 @@ describe('User controller tests', () => {
         });
 
         it('should render update-password-form if user is autenticated', () => {
-            req._isAuthenticated = true;
+            req.login({ user_name: 'myUserName' });
             controller.updatePasswordForm(req, res);
             expect(res.viewName).to.be.equal('update-password-form');
         });
 
         // eslint-disable-next-line max-len
         it('should render update-password-form with user and is autenticated true', () => {
-            req._isAuthenticated = true;
-            const user = {
-                user_name: 'MyUserName',
-            };
-            req.user = user;
+            req.login({ user_name: 'myUserName' });
             const expected = {
-                'user': user,
+                'user': req.user,
                 'isAutenticated': true,
             };
 
@@ -394,7 +384,7 @@ describe('User controller tests', () => {
         });
 
         it('Should call data users updatePassword', (done) => {
-            req._isAuthenticated = true;
+            req.login({ user_name: 'myUserName' });
             const stubUpdate = sinon.stub(data.users, 'updatePassword')
                 .returns(Promise.resolve());
             controller.updatePassword(req, res)
@@ -412,10 +402,7 @@ describe('User controller tests', () => {
 
         // eslint-disable-next-line max-len
         it('Should call data users updatePassword with request body', (done) => {
-            req._isAuthenticated = true;
-            req.user = {
-                user_name: 'MyUserName',
-            };
+            req.login({ user_name: 'myUserName' });
 
             const expectedParam = {
                 user_name: 'MyUserName',
@@ -441,7 +428,7 @@ describe('User controller tests', () => {
 
         // eslint-disable-next-line max-len
         it('Should redirect to /api/users/profile after updatePassword', (done) => {
-            req._isAuthenticated = true;
+            req.login({ user_name: 'myUserName' });
             const stubUpdate = sinon.stub(data.users, 'updatePassword')
                 .returns(Promise.resolve());
             controller.updatePassword(req, res)
@@ -457,7 +444,7 @@ describe('User controller tests', () => {
         });
 
         it('Should render update-password-form with error', (done) => {
-            req._isAuthenticated = true;
+            req.login({ user_name: 'myUserName' });
             const err = 'MyError';
             const stubUpdate = sinon.stub(data.users, 'updatePassword')
                 .returns(Promise.reject(err));
@@ -477,8 +464,7 @@ describe('User controller tests', () => {
 
         // eslint-disable-next-line max-len
         it('Should render update-password-form with user and authenticated true', (done) => {
-            req._isAuthenticated = true;
-            req.user = 'MyUser';
+            req.login({ user_name: 'myUserName' });
             const err = 'MyError';
             const stubUpdate = sinon.stub(data.users, 'updatePassword')
                 .returns(Promise.reject(err));
@@ -502,5 +488,153 @@ describe('User controller tests', () => {
         });
     });
 
+    describe('Profile tests', () => {
+        // eslint-disable-next-line max-len
+        it('should redirect to /api/users/login if user is not autenticated server ', () => {
+            controller.profile(req, res);
+            expect(res.redirectUrl).to.be.equal('/api/users/login');
+        });
 
+        // eslint-disable-next-line max-len
+        it('should render profile template if user is autenticated server ', () => {
+            req.login();
+            controller.profile(req, res);
+            expect(res.viewName).to.be.equal('profile');
+        });
+
+        // eslint-disable-next-line max-len
+        it('should render profile template if user is autenticated server with user, user_profile,isAutenticated and showComment',
+            () => {
+                const user = {
+                    user_name: 'MyUserName',
+                };
+                req.login(user);
+
+                const expected = {
+                    'user': req.user,
+                    'user_profile': req.user,
+                    'isAutenticated': true,
+                    'showComment': true,
+                };
+
+                controller.profile(req, res);
+                expect(res.context).to.be.deep.equal(expected);
+            });
+    });
+
+    describe('User Profile tests', (done) => {
+        it('Should call data users findByUserName with username', () => {
+            const username = 'MyUserName';
+            req.params = {};
+            req.params.username = username;
+
+            const stubFind = sinon.stub(data.users, 'findByUserName')
+                .returns(Promise.resolve());
+
+            controller.getUserProfile(req, res)
+                .then(() => {
+                    // eslint-disable-next-line no-unused-expressions
+                    expect(stubFind).to.have.been.calledOnce;
+                    expect(stubFind).to.have.been.calledWith(username);
+                    stubFind.restore();
+                })
+                .catch((error) => {
+                    stubFind.restore();
+                    done(error);
+                });
+        });
+
+        it('Should render profile template with user found', () => {
+            const username = 'MyUserName';
+            req.params = {};
+            req.params.username = username;
+
+            const user = {
+                username: username,
+            };
+
+            const stubFind = sinon.stub(data.users, 'findByUserName')
+                .returns(Promise.resolve(user));
+
+            controller.getUserProfile(req, res)
+                .then(() => {
+                    expect(res.viewName).to.be.equal('profile');
+                    expect(res.context.user_profile).to.be.deep.equal(user);
+                    stubFind.restore();
+                })
+                .catch((error) => {
+                    stubFind.restore();
+                    done(error);
+                });
+        });
+
+        // eslint-disable-next-line max-len
+        it('Should render profile template with empty user if not found', () => {
+            const username = 'MyUserName';
+            req.params = {};
+            req.params.username = username;
+
+            const stubFind = sinon.stub(data.users, 'findByUserName')
+                .returns(Promise.resolve());
+
+            controller.getUserProfile(req, res)
+                .then(() => {
+                    expect(res.viewName).to.be.equal('profile');
+                    expect(res.context.user_profile).to.be.deep.equal({});
+                    stubFind.restore();
+                })
+                .catch((error) => {
+                    stubFind.restore();
+                    done(error);
+                });
+        });
+
+        // eslint-disable-next-line max-len
+        it('Should render profile template with isAutenticated true and my user profile if other user is found', () => {
+            req.login({ user_name: 'myUserName' });
+
+            const username = 'OtherUserName';
+            req.params = {};
+            req.params.username = username;
+
+            const user = {
+                username: username,
+            };
+
+            const stubFind = sinon.stub(data.users, 'findByUserName')
+                .returns(Promise.resolve(user));
+
+            controller.getUserProfile(req, res)
+                .then(() => {
+                    expect(res.viewName).to.be.equal('profile');
+                    expect(res.context.isAutenticated).to.be.equal(true);
+                    stubFind.restore();
+                })
+                .catch((error) => {
+                    stubFind.restore();
+                    done(error);
+                });
+        });
+
+        // eslint-disable-next-line max-len
+        it('Should render profile template with isAutenticated false if user not found', () => {
+            const username = 'MyUserName';
+            req.params = {};
+            req.params.username = username;
+
+            const stubFind = sinon.stub(data.users, 'findByUserName')
+                .returns(Promise.resolve());
+
+            controller.getUserProfile(req, res)
+                .then(() => {
+                    expect(res.viewName).to.be.equal('profile');
+                    expect(res.context.isAutenticated).to.be.equal(false);
+                    stubFind.restore();
+                })
+                .catch((error) => {
+                    stubFind.restore();
+                    done(error);
+                });
+        });
+    });
 });

@@ -10,6 +10,10 @@ const getRequestMock = (options = {}) => {
             this._isAuthenticated = false;
             this.user = '';
         },
+        login(user) {
+            this._isAuthenticated = true;
+            this.user = user;
+        },
     };
 
     Object.keys(options)
