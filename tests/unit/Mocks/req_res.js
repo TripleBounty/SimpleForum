@@ -1,11 +1,14 @@
 const getRequestMock = (options = {}) => {
     const req = {
+        body: {},
+        user: '',
         _isAuthenticated: false,
         isAuthenticated() {
             return this._isAuthenticated;
         },
         logout() {
             this._isAuthenticated = false;
+            this.user = '';
         },
     };
 

@@ -13,7 +13,7 @@ module.exports = (data) => {
     }
 
     function register(req, res, next) {
-        data.users.create(req.body)
+        return data.users.create(req.body)
             .then(() => {
                 req.body = {
                     username: req.body.user_name,
@@ -33,11 +33,11 @@ module.exports = (data) => {
 
     function updateForm(req, res) {
         if (!req.isAuthenticated()) {
-            res.status(401).redirect('/api/users/login');
-            return;
+            return Promise.resolve(
+                res.status(401).redirect('/api/users/login'));
         }
 
-        data.countries.getAll()
+        return data.countries.getAll()
             .then((countries) => {
                 res.render('update-form', {
                     'countries': countries,
@@ -49,14 +49,14 @@ module.exports = (data) => {
 
     function update(req, res, next) {
         if (!req.isAuthenticated()) {
-            res.status(401).redirect('/api/users/login');
-            return;
+            return Promise.resolve(
+                res.status(401).redirect('/api/users/login'));
         }
 
         const body = req.body;
         body.user_name = req.user.user_name;
 
-        data.users.update(body)
+        return data.users.update(body)
             .then(() => {
                 res.redirect('/api/users/profile');
             })
@@ -87,13 +87,13 @@ module.exports = (data) => {
 
     function updatePassword(req, res, next) {
         if (!req.isAuthenticated()) {
-            res.status(401).redirect('/api/users/login');
-            return;
+            return Promise.resolve(
+                res.status(401).redirect('/api/users/login'));
         }
 
         const body = req.body;
 
-        data.users.updatePassword(body)
+        return data.users.updatePassword(body)
             .then(() => {
                 res.redirect('/api/users/profile');
             })
@@ -160,7 +160,7 @@ module.exports = (data) => {
 
         const username = req.params.username;
 
-        data.users.findByUserName(username)
+        return data.users.findByUserName(username)
             .then((userProfile) => {
                 if (userProfile) {
                     res.render('profile', {
