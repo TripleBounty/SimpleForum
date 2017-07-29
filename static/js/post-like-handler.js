@@ -31,17 +31,8 @@ $('.likesLink').on('click', (event) => {
         const negativeLike = document.getElementById(postId + 'd');
         if (negativeLike.classList.contains('inactive')) {
             negativeLike.classList.remove('inactive');
-
-            function delete_cookie(negativeLikeId) {
-            document.cookie = negativeLikeId + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-            }
-            delete_cookie(negativeLikeId);
-
-            function delete_cookie(positiveLikeId) {
-            document.cookie = positiveLikeId + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-            }
-        console.log(positiveLikeId);
-            delete_cookie(positiveLikeId);
+            deleteCookie(negativeLikeId);
+            deleteCookie(positiveLikeId);
         } else {
             event.target.classList.add('inactive');
         }
@@ -72,17 +63,8 @@ $('.hatesLink').on('click', (event) => {
         const positiveLike = document.getElementById(postId + 'l');
         if (positiveLike.classList.contains('inactive')) {
             positiveLike.classList.remove('inactive');
-
-            function delete_cookie(positiveLikeId) {
-            document.cookie = positiveLikeId + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-            }
-                console.log(positiveLikeId);
-            delete_cookie(positiveLikeId);
-
-            function delete_cookie(negativeLikeId) {
-            document.cookie = negativeLikeId + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-            }
-            delete_cookie(negativeLikeId);
+            deleteCookie(positiveLikeId);
+            deleteCookie(negativeLikeId);
         } else {
             event.target.classList.add('inactive');
         }
@@ -90,3 +72,7 @@ $('.hatesLink').on('click', (event) => {
         console.error(err);
     });
 });
+
+function deleteCookie(LikeId) {
+    document.cookie = LikeId + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}

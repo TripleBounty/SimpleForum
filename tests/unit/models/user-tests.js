@@ -16,8 +16,6 @@ const user = {
     contact_no: '+35988664552355',
 };
 
-//validatePassword
-
 describe('User model tests', () => {
     describe('getDataBaseModel tests', () => {
         // eslint-disable-next-line max-len
