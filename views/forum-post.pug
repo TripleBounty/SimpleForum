@@ -12,36 +12,59 @@ block scripts
   script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js')
   script(src='/libs/croppie/croppie.js')
   link(rel='stylesheet', href='/libs/croppie/croppie.css')
+  // bootstrap
+  script(src='http://code.jquery.com/jquery-2.0.3.min.js')
+  script(src='http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js')
+  // x-editable (bootstrap version)
+  link(href='http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css', rel='stylesheet')
+  script(src='http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js')
+  // main.js
+  script(src='/static/js/editable.js')
+  script(src='/static/js/deletable.js')
+
 
 block body
   -var postN = post._id;
   .container
     form.well
       .media
-        a.pull-left(href='#')
+        a.pull-right(href='#')
           img.media-object.user-avatar(src= post.img)
         |
         .media-body
           strong.post-head.media-heading
-              =post.title
+            =post.title
           br
           p
-            =post.content
-        .row
-          p
-            i.icon-user
-            |  by 
-            a(href='/api/users/profile/' + post.username) 
-              =post.username
-            |  
-            i.glyphicon.glyphicon-calendar
-              =post.date
-            | 
-            i.glyphicon.glyphicon-comment
-            | 
-            =post.comments.length
+                div.comment-box
+                    div.comment-content.postMain                    
+                        input(type= 'hidden', name=postN, value=post.content, id=post._id)
+                        h4.postMain.motherFucker2.media-heading=post.content
+                        div.comment-footer
+                            if isAutenticated
+                                if post.username == user.user_name
+                                    a.btn.btn-warning.btnEdit
+                                        i.glyphicon.glyphicon-pencil
+                                        |  Edit 
+                                    a.btn.btn-danger.btnDelete.hidden
+                                        i.glyphicon.glyphicon-remove
+                            else    
+                                | 
+                            |
+                            i.icon-user
+                            |  by 
+                            a(href="/api/users/profile/" + post.username) 
+                                =post.username
+                            |  
+                            i.glyphicon.glyphicon-calendar
+                                =post.date
+                            | 
+                            i.glyphicon.glyphicon-comment
+                                =post.comments.length
+                            |
         +newComment(post._id, post._id, 'post')
         ul#comments-list.comments-list
           each comment in post.comments
             li
-              +comment(comment, post._id)
+              if(comment.isDeleted==false)
+                +comment(comment, post._id, user)

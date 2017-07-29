@@ -1,6 +1,6 @@
 include comment.pug
 
-mixin comment(c, p)
+mixin comment(c, p, u)
     .media
         div.comment-avatar.pull-left
             img.media-object.user-avatar(src=c.img)
@@ -9,9 +9,21 @@ mixin comment(c, p)
             |  said :
             .media-body
                 div.comment-box
-                    div.comment-content
-                        h4.media-heading=c.message
+                    div.comment-content                        
+                        input(type= 'hidden', name=postN, value=c.message, id=c._id)
+                        h4.motherFucker2.media-heading=c.message
                         div.comment-footer
+                            if isAutenticated
+                                if c.username == user.user_name
+                                    a.btn.btn-warning.btnEdit
+                                        i.glyphicon.glyphicon-pencil
+                                        |  Edit 
+                                    |  
+                                    a.btn.btn-danger.btnDelete.hidden
+                                        i.glyphicon.glyphicon-remove
+                            else    
+                                | 
+                            |
                             i.icon-user
                             |  by 
                             a(href="/api/users/profile/" + c.username) 
@@ -22,10 +34,11 @@ mixin comment(c, p)
                             | 
                             i.glyphicon.glyphicon-comment
                                 =c.comments.length
-                            | 
+                            |
                     +newComment(p, c._id, 'comment')
                     .row
                         ul.comments-list.reply-list
                             each nestedComment in c.comments
                                 li
-                                    +comment(nestedComment)
+                                    if(nestedComment.isDeleted==false)
+                                        +comment(nestedComment)

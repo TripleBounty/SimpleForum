@@ -26,6 +26,7 @@ class Posts extends BaseData {
         dbModel.date = this._getDate();
         dbModel.username = user.user_name;
         dbModel.img = user.avatar;
+        dbModel.isDeleted= false;
 
         return this.findPostByTitle(model.title)
             .then((post) => {

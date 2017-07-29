@@ -155,3 +155,29 @@ body {
     height: 350px;
     overflow-y: auto;
 }
+
+.motherFucker {
+    padding: 0;
+}
+
+.motherFucker2 {
+    padding: 0;
+}
+
+.btnEdit {
+    border-top: none;
+}
+
+.btnDelete {
+    border-top: none;
+}
+
+.postMain {
+    background: rgba(0, 199, 199, 0.09);
+    padding: 12px;
+    min-height: 125px;
+}
+
+.toDelete {
+    visibility: 1;
+}

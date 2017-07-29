@@ -1,84 +1,85 @@
 extends shared/_master
 
 block body
-     each post in posts        
-        .container
-            -var postId = post._id            
-            .well
-                .media
-                    a.pull-left(href='/forum-post/' + postId)
-                        img.media-object(src=''+ post.img).postImg
-                    |   &#x9;&#x9;
-                    .media-body
-                        -var title = post.title
-                        -var titleCount = title.length
-                        -var substrTitle = title.substr(0,57) 
-                        if titleCount > 57
-                            h3.media-heading=substrTitle.toUpperCase() + '...'
-                        else    
-                            h3.media-heading=substrTitle.toUpperCase()
-                        |
-                        a.pull-right(href='#')
-                            img.media-object.user-avatar(src= post.img)
-                        p.text-right by 
-                            -var user = post.username
-                            a(href='/api/users/profile/' + user)
-                                =user.toUpperCase()
-                        |           
-                        -var content = post.content
-                        -var contentCount = content.length
-                        -var substrContent = content.substr(0,256) 
-                        if contentCount > 256
-                            p=substrContent
-                                |...
+     each post in posts
+        if(post.isDeleted==false)        
+            .container
+                -var postId = post._id
+                .well
+                    .media
+                        a.pull-left(href= '/forum-post/' + postId)
+                            img.media-object(src=''+ post.img).postImg
+                        |   &#x9;&#x9;
+                        .media-body
+                            -var title = post.title
+                            - var titleCount = title.length
+                            -var substrTitle = title.substr(0, 57)
+                            if titleCount > 57
+                                h3.media-heading=substrTitle.toUpperCase() + '...'
+                            else    
+                                h3.media-heading=substrTitle.toUpperCase()
+                            |
+                            a.pull-right(href= '#')
+                                img.media-object.user-avatar(src= post.img)
+                            p.text-right by
+                                -var user = post.username
+                                a(href= '/api/users/profile/' + user)
+                                    =user.toUpperCase()
+                            |           
+                            -var content = post.content
+                            - var contentCount = content.length
+                            -var substrContent = content.substr(0, 256)
+                            if contentCount > 256
+                                p=substrContent
+                                    |...
+                            else
+                                p=substrContent
+                    -var comment = post.comments
+                    ul.list-inline.list-unstyled
+                      li
+                        span
+                          i.glyphicon.glyphicon-calendar
+                          = post.date
+                      |
+                      li |
+                      |
+                      span
+                        i.glyphicon.glyphicon-comment
+                        | 
+                        =comment.length
+                      |             
+                      li |
+                      |             
+                      li
+                        | Positive Nodes 
+                        if(post.nodes< 150)
+                            text(id= 'positive' + postId).positiveNodes=post.nodes
                         else
-                            p=substrContent
-                -var comment = post.comments
-                ul.list-inline.list-unstyled
-                  li
-                    span
-                      i.glyphicon.glyphicon-calendar
-                      =post.date
-                  |             
-                  li |
-                  |             
-                  span
-                    i.glyphicon.glyphicon-comment
-                    | 
-                    =comment.length
-                  |             
-                  li |
-                  |             
-                  li
-                    | Positive Nodes 
-                    if(post.nodes < 150)
-                        text(id='positive'+postId).positiveNodes=post.nodes
-                    else
-                        i.glyphicon.glyphicon-fire.positiveNodes.manyNodes
-                        |  
-                        text(id='positive'+postId).positiveNodes.manyNodes=post.nodes
-                        |                     
-                  |  
-                  li |
-                  |           
-                  li
-                  | Rate or hate  
-                  |
-                  li |                                    
-                  a(id=postId+'l').likesLink.glyphicon.glyphicon-circle-arrow-up.positiveNodes.set-value-from-cookie
-                  a(id=postId+'d').hatesLink.glyphicon.glyphicon-circle-arrow-down.positiveNodes.set-value-from-cookie
-                  li |
-                  | 
-                  li
-                    span.positiveNodes
-                      i.fa.fa-facebook-square
-                    |               
-                    span.positiveNodes
-                      i.fa.fa-twitter-square
-                    |               
-                    span.positiveNodes
-                      i.fa.fa-google-plus-square      
-                  li
-                    span.positiveNodes | 
-                        a(href='/forum-post/' + postId) Read More
+                            i.glyphicon.glyphicon-fire.positiveNodes.manyNodes
+                            |  
+                            text(id= 'positive' + postId).positiveNodes.manyNodes=post.nodes
+                            |                     
+                      |  
+                      li |
+                      |           
+                      li
+                      | Rate or hate  
+                      |
+                      li |                                    
+                      a(id= postId + 'l').likesLink.glyphicon.glyphicon-circle-arrow-up.positiveNodes.set-value-from-cookie
+                         a(id= postId + 'd').hatesLink.glyphicon.glyphicon-circle-arrow-down.positiveNodes.set-value-from-cookie
+                      li |
+                      | 
+                      li
+                        span.positiveNodes
+                          i.fa.fa-facebook-square
+                        |               
+                        span.positiveNodes
+                          i.fa.fa-twitter-square
+                        |               
+                        span.positiveNodes
+                          i.fa.fa-google-plus-square
+                      li
+                        span.positiveNodes | 
+                            a(href= '/forum-post/' + postId) Read More
      script(src='/static/js/post-like-handler.js')

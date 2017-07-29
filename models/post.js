@@ -16,6 +16,7 @@ class Post {
             nodes: nodes,
             username: user_name,
             img: avatar,
+            isDeleted: false,
             comments: [],
         };
     }

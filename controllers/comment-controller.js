@@ -24,6 +24,26 @@ module.exports = (data) => {
             });
     }
 
+    function updateComment(req, res) {
+        data.comments.update(req.body, req.user)
+            .then(() => {
+                res.status(200).send();                
+            })
+            .catch((error) => {
+                res.render('comment', { inavalid: error });
+            });
+    }
+
+    function deleteComment(req, res) {
+        data.comments.delete(req.body, req.user)
+            .then(() => {
+                res.status(200).send(); 
+            })
+            .catch((error) => {
+                res.render('comment', { inavalid: error });
+            });
+    }
+
     function newComment(req, res) {
         if (!req.isAuthenticated()) {
             res.status(401).redirect('/api/users/login');
@@ -42,5 +62,7 @@ module.exports = (data) => {
     return {
         showComment,
         newComment,
+        updateComment,
+        deleteComment,
     };
 };

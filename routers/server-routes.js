@@ -17,6 +17,8 @@ const attach = (app, controllers) => {
     router.post('/comment', commentController.newComment);
     router.get('/comment', commentController.showComment);
     router.get('/chat-room', chatController.showRoom);
+    router.post('/comment/update', commentController.updateComment);
+    router.post('/comment/delete', commentController.deleteComment);
 
     app.use('/', router);
 };

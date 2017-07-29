@@ -14,6 +14,7 @@ class Comment {
             date: date,
             username: user_name,
             img: avatar,
+            isDeleted: false,
             comments: [],
         };
     }
