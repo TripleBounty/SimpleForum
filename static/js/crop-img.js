@@ -32,7 +32,7 @@ $modal.on('click', '#upload-avatar-OK', function(e) {
     }).then((resp) => {
         const $body = $('body');
         $body.addClass('loading');
-        //console.log(resp);
+
         $.ajax({
             url: '/upload',
             type: 'POST',
