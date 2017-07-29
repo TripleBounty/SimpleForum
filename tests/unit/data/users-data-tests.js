@@ -165,6 +165,7 @@ describe('Users data tests', () => {
 
         // eslint-disable-next-line max-len
         it('Create should reject with Invalid input data is model is not valid', (done) => {
+            const oldIsModelValid = users._isModelValid;
             users._isModelValid = () => {
                 return false;
             };
@@ -181,12 +182,16 @@ describe('Users data tests', () => {
                 })
                 .catch((err) => {
                     expect(err).to.be.deep.equal('Invalid input data');
+                    users._isModelValid = oldIsModelValid;
                     done();
                 })
-                .catch(done);
+                .catch((err) => {
+                    users._isModelValid = oldIsModelValid;
+                });
         });
 
         it('Create should add object to the collection', (done) => {
+            const oldIsModelValid = users._isModelValid;
             users._isModelValid = () => {
                 return true;
             };
@@ -206,15 +211,18 @@ describe('Users data tests', () => {
                 .then(() => {
                     expect(items).to.contains(model);
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isModelValid = oldIsModelValid;
                     done();
                 })
                 .catch((err) => {
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isModelValid = oldIsModelValid;
                     done(err);
                 });
         });
 
         it('Create should reject if user with same user_name exist', (done) => {
+            const oldIsModelValid = users._isModelValid;
             users._isModelValid = () => {
                 return true;
             };
@@ -239,16 +247,19 @@ describe('Users data tests', () => {
                 .catch((err) => {
                     expect(err).to.be.deep.equal('Invalid input data');
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isModelValid = oldIsModelValid;
                     done();
                 })
                 .catch((err) => {
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isModelValid = oldIsModelValid;
                     done(err);
                 });
         });
 
         // eslint-disable-next-line max-len
         it('Update should reject with Invalid input data is model is not valid', (done) => {
+            const oldIsModelValid = users._isModelValid;
             users._isModelValid = () => {
                 return false;
             };
@@ -265,13 +276,17 @@ describe('Users data tests', () => {
                 })
                 .catch((err) => {
                     expect(err).to.be.deep.equal('Invalid input data');
+                    users._isModelValid = oldIsModelValid;
                     done();
                 })
-                .catch(done);
+                .catch((err) => {
+                    users._isModelValid = oldIsModelValid;
+                });
         });
 
         // eslint-disable-next-line max-len
         it('Update should reject if user with same user_name does not exist', (done) => {
+            const oldIsModelValid = users._isModelValid;
             users._isModelValid = () => {
                 return true;
             };
@@ -294,15 +309,18 @@ describe('Users data tests', () => {
                 .catch((err) => {
                     expect(err).to.be.deep.equal('Invalid input data');
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isModelValid = oldIsModelValid;
                     done();
                 })
                 .catch((err) => {
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isModelValid = oldIsModelValid;
                     done(err);
                 });
         });
 
         it('Update should call update db with correct params', (done) => {
+            const oldIsModelValid = users._isModelValid;
             users._isModelValid = () => {
                 return true;
             };
@@ -327,16 +345,19 @@ describe('Users data tests', () => {
                 .then((data) => {
                     expect(data).to.be.deep.equal(expected);
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isModelValid = oldIsModelValid;
                     done();
                 })
                 .catch((err) => {
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isModelValid = oldIsModelValid;
                     done(err);
                 });
         });
 
         // eslint-disable-next-line max-len
         it('updatePassword should reject with Invalid input data is model is not valid', (done) => {
+            const oldIsPasswordValid = users._isPasswordValid;
             users._isPasswordValid = () => {
                 return false;
             };
@@ -353,13 +374,18 @@ describe('Users data tests', () => {
                 })
                 .catch((err) => {
                     expect(err).to.be.deep.equal('Invalid input data');
+                    users._isPasswordValid = oldIsPasswordValid;
                     done();
                 })
-                .catch(done);
+                .catch((err) => {
+                    users._isPasswordValid = oldIsPasswordValid;
+                    done(err);
+                });
         });
 
         // eslint-disable-next-line max-len
         it('updatePassword should reject if user with same user_name does not exist', (done) => {
+            const oldIsPasswordValid = users._isPasswordValid;
             users._isPasswordValid = () => {
                 return true;
             };
@@ -382,16 +408,19 @@ describe('Users data tests', () => {
                 .catch((err) => {
                     expect(err).to.be.deep.equal('User do not exist');
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isPasswordValid = oldIsPasswordValid;
                     done();
                 })
                 .catch((err) => {
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isPasswordValid = oldIsPasswordValid;
                     done(err);
                 });
         });
 
         // eslint-disable-next-line max-len
         it('updatePassword should reject if old password is incorrect', (done) => {
+            const oldIsPasswordValid = users._isPasswordValid;
             users._isPasswordValid = () => {
                 return true;
             };
@@ -424,17 +453,20 @@ describe('Users data tests', () => {
                 .catch((err) => {
                     expect(err).to.be.deep.equal('Incorrect old password');
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isPasswordValid = oldIsPasswordValid;
                     done();
                 })
                 .catch((err) => {
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isPasswordValid = oldIsPasswordValid;
                     done(err);
                 });
         });
 
         // eslint-disable-next-line max-len
         it('updatePassword should call update db with correct params', (done) => {
-            users._isModelValid = () => {
+            const oldIsPasswordValid = users._isPasswordValid;
+            users._isPasswordValid = () => {
                 return true;
             };
 
@@ -466,10 +498,12 @@ describe('Users data tests', () => {
                 .then((data) => {
                     expect(data).to.be.deep.equal(expected);
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isPasswordValid = oldIsPasswordValid;
                     done();
                 })
                 .catch((err) => {
                     users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    users._isPasswordValid = oldIsPasswordValid;
                     done(err);
                 });
         });

@@ -74,8 +74,9 @@ class User {
         this._validateEmail(email, error);
         this._validateDate(date, error);
         if (type === 'create') {
-            if (user_password.length < 8 &&
-                user_password.localeCompare(confirm_password) === 0) {
+            if (user_password.length < 8 ||
+                // eslint-disable-next-line 
+                user_password !== confirm_password) {
                 error.push({
                     field: 'password',
                     message: 'Invalid password',
@@ -100,9 +101,10 @@ class User {
         const error = [];
 
 
-        if (old_password.length < 8 &&
-            user_password.length < 8 &&
-            user_password.localeCompare(confirm_password) === 0) {
+        if (old_password.length < 8 ||
+            user_password.length < 8 ||
+            // eslint-disable-next-line 
+            user_password !== confirm_password) {
             error.push({
                 field: 'password',
                 message: 'Invalid password',
