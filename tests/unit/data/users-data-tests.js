@@ -191,6 +191,7 @@ describe('Users data tests', () => {
                 return true;
             };
 
+            const oldGetDataBaseModel = users.ModelClass.getDataBaseModel;
             users.ModelClass.getDataBaseModel = (m) => {
                 return m;
             };
@@ -204,9 +205,11 @@ describe('Users data tests', () => {
             users.create(model)
                 .then(() => {
                     expect(items).to.contains(model);
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
                     done();
                 })
                 .catch((err) => {
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
                     done(err);
                 });
         });
@@ -216,6 +219,7 @@ describe('Users data tests', () => {
                 return true;
             };
 
+            const oldGetDataBaseModel = users.ModelClass.getDataBaseModel;
             users.ModelClass.getDataBaseModel = (m) => {
                 return m;
             };
@@ -234,9 +238,13 @@ describe('Users data tests', () => {
                 })
                 .catch((err) => {
                     expect(err).to.be.deep.equal('Invalid input data');
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
                     done();
                 })
-                .catch(done);
+                .catch((err) => {
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    done(err);
+                });
         });
 
         // eslint-disable-next-line max-len
@@ -268,6 +276,7 @@ describe('Users data tests', () => {
                 return true;
             };
 
+            const oldGetDataBaseModel = users.ModelClass.getDataBaseModel;
             users.ModelClass.getDataBaseModel = (m) => {
                 return m;
             };
@@ -284,9 +293,13 @@ describe('Users data tests', () => {
                 })
                 .catch((err) => {
                     expect(err).to.be.deep.equal('Invalid input data');
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
                     done();
                 })
-                .catch(done);
+                .catch((err) => {
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    done(err);
+                });
         });
 
         it('Update should call update db with correct params', (done) => {
@@ -294,6 +307,7 @@ describe('Users data tests', () => {
                 return true;
             };
 
+            const oldGetDataBaseModel = users.ModelClass.getDataBaseModel;
             users.ModelClass.getDataBaseModel = (m) => {
                 return m;
             };
@@ -312,9 +326,11 @@ describe('Users data tests', () => {
             users.update(model)
                 .then((data) => {
                     expect(data).to.be.deep.equal(expected);
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
                     done();
                 })
                 .catch((err) => {
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
                     done(err);
                 });
         });
@@ -348,6 +364,7 @@ describe('Users data tests', () => {
                 return true;
             };
 
+            const oldGetDataBaseModel = users.ModelClass.getDataBaseModel;
             users.ModelClass.getDataBaseModel = (m) => {
                 return m;
             };
@@ -364,9 +381,13 @@ describe('Users data tests', () => {
                 })
                 .catch((err) => {
                     expect(err).to.be.deep.equal('User do not exist');
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
                     done();
                 })
-                .catch(done);
+                .catch((err) => {
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    done(err);
+                });
         });
 
         // eslint-disable-next-line max-len
@@ -375,6 +396,7 @@ describe('Users data tests', () => {
                 return true;
             };
 
+            const oldGetDataBaseModel = users.ModelClass.getDataBaseModel;
             users.ModelClass.getDataBaseModel = (m) => {
                 return m;
             };
@@ -401,9 +423,13 @@ describe('Users data tests', () => {
                 })
                 .catch((err) => {
                     expect(err).to.be.deep.equal('Incorrect old password');
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
                     done();
                 })
-                .catch(done);
+                .catch((err) => {
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
+                    done(err);
+                });
         });
 
         // eslint-disable-next-line max-len
@@ -412,6 +438,7 @@ describe('Users data tests', () => {
                 return true;
             };
 
+            const oldGetDataBaseModel = users.ModelClass.getDataBaseModel;
             users.ModelClass.getDataBaseModel = (m) => {
                 return m;
             };
@@ -438,9 +465,11 @@ describe('Users data tests', () => {
             users.updatePassword(model)
                 .then((data) => {
                     expect(data).to.be.deep.equal(expected);
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
                     done();
                 })
                 .catch((err) => {
+                    users.ModelClass.getDataBaseModel = oldGetDataBaseModel;
                     done(err);
                 });
         });
