@@ -498,6 +498,10 @@ describe('User controller tests', () => {
         // eslint-disable-next-line max-len
         it('should render profile template if user is autenticated server ', () => {
             req.login();
+            req.user = {
+                comments: [],
+            };
+            req.query = {};
             controller.profile(req, res);
             expect(res.viewName).to.be.equal('profile');
         });
@@ -507,14 +511,23 @@ describe('User controller tests', () => {
             () => {
                 const user = {
                     user_name: 'MyUserName',
+                    comments: [],
                 };
                 req.login(user);
+                req.query = {};
 
                 const expected = {
                     'user': req.user,
                     'user_profile': req.user,
                     'isAutenticated': true,
                     'showComment': true,
+                    'commentsObject': {
+                        'comments': [],
+                        'currentPage': 0,
+                        'maxPage': 0,
+                        'nextPage': 1,
+                        'prevPage': -1,
+                    },
                 };
 
                 controller.profile(req, res);

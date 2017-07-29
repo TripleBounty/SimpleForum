@@ -152,6 +152,14 @@ body {
 }
 
 #comment-container {
-    height: 350px;
+    height: 450px;
     overflow-y: auto;
+    overflow-x: hidden;
+}
+
+li.disabled {
+  cursor: not-allowed;
+}
+li.disabled a {
+  pointer-events: none;
 }

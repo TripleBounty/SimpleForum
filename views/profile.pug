@@ -51,7 +51,7 @@ block body
         | 
         =user_profile.comments.length
       ul#comments-list.comments-list
-      each comment in user_profile.comments
+      each comment in commentsObject.comments
         li.profile-info-row
           .media
             .media-body
@@ -61,3 +61,28 @@ block body
                   div.comment-footer
                       i.icon-user
                       =comment.date
+      .container
+        ul.pager
+          if commentsObject.prevPage < 1
+            li.disabled
+              a(href='/api/users/profile?page=' + commentsObject.prevPage)
+                span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+                span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+          else
+            li
+              a(href='/api/users/profile?page=' + commentsObject.prevPage)
+                span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+                span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+          li
+            span
+             | Page #{commentsObject.currentPage}
+          if commentsObject.nextPage > commentsObject.maxPage
+            li.disabled
+              a(href='/api/users/profile?page=' + commentsObject.nextPage)
+                span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+                span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+          else
+            li
+              a(href='/api/users/profile?page=' + commentsObject.nextPage)
+                span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+                span.glyphicon.glyphicon-chevron-right(aria-hidden='true')

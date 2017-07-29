@@ -141,12 +141,37 @@ module.exports = (data, bucketConfig) => {
             return;
         }
 
+        const commentsObject = _getComments(req.user, req.query);
+
         res.render('profile', {
             'user': req.user,
             'user_profile': req.user,
             'isAutenticated': true,
             'showComment': true,
+            'commentsObject': commentsObject,
         });
+    }
+
+    function _getComments(user, query) {
+        const maxOnPage = 3;
+        const maxPage = Math.ceil(user.comments.length / maxOnPage);
+        let page = +(query.page || '1');
+        page = page < 1 ? 1 : page;
+        page = page > maxPage ? maxPage : page;
+
+        const comments = user.comments
+            .sort((a, b) => {
+                return new Date(b.date) - new Date(a.date);
+            })
+            .slice((page - 1) * maxOnPage, page * maxOnPage);
+
+        return {
+            comments,
+            currentPage: page,
+            prevPage: page - 1,
+            nextPage: page + 1,
+            maxPage: maxPage,
+        };
     }
 
     function getUserProfile(req, res) {
