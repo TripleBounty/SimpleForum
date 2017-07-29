@@ -154,7 +154,6 @@ body {
 #comment-container {
     height: 450px;
     overflow-y: auto;
-<<<<<<< HEAD
 }
 
 .motherFucker {
@@ -181,7 +180,6 @@ body {
 
 .toDelete {
     visibility: 1;
-=======
     overflow-x: hidden;
 }
 
@@ -190,5 +188,4 @@ li.disabled {
 }
 li.disabled a {
   pointer-events: none;
->>>>>>> af74f6e917060ebaa4b999274d7da906280ad686
 }
