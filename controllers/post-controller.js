@@ -26,7 +26,7 @@ module.exports = (data) => {
         }
 
         const id = req.params.postId;
-        data.posts.findById(id)
+        return data.posts.findById(id)
             .then((post) => {
                 res.render('forum-post', {
                     'user': user,
@@ -43,9 +43,9 @@ module.exports = (data) => {
             user = req.user;
             isAutenticated = true;
         }
-        data.posts.getAllSortedByDate()
-            .then((posts) => {
-                res.cookie(value, 'session', { maxAge: 9999 });
+        return data.posts.getAllSortedByDate()
+            .then((posts) => {       
+                res.cookie(value, 'session', { maxAge: 9999 });         
                 res.render('home', {
                     'user': user,
                     'isAutenticated': isAutenticated,
@@ -58,7 +58,7 @@ module.exports = (data) => {
         const postId = req.body.postId;
         const node = +req.body.node;
         const postType = req.body.postType;
-        data.posts.updateLikes(postId, node, postType)
+        return data.posts.updateLikes(postId, node, postType)
             .then(() => {
                 res.cookie(postId + postType, '', { maxAge: 9999 });
                 res.status(200).send();
@@ -83,7 +83,7 @@ module.exports = (data) => {
             return;
         }
 
-        data.posts.create(req.body, req.user)
+        return data.posts.create(req.body, req.user)
             .then(() => {
                 res.redirect('/');
             })

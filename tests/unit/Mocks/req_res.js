@@ -2,6 +2,10 @@ const getRequestMock = (options = {}) => {
     const req = {
         body: {},
         user: '',
+        post: '',
+        postId: '',
+        node:'',
+        postType:'', 
         _isAuthenticated: false,
         isAuthenticated() {
             return this._isAuthenticated;
@@ -33,6 +37,12 @@ const getResponseMock = () => {
             this.viewName = viewName;
             this.context = context;
             return this;
+        },
+        cookie() {
+            value = 'pruc';
+            session = 'session';
+            {maxAge: 9999};
+            return this;        
         },
         status(statusCode) {
             this.statusCode = statusCode;
