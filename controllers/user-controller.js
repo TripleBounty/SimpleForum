@@ -154,12 +154,15 @@ module.exports = (data, bucketConfig) => {
 
     function _getComments(user, query) {
         const maxOnPage = 3;
-        const maxPage = Math.ceil(user.comments.length / maxOnPage);
+        const activeComments = user.comments
+            .filter((c) => c.isDeleted === false);
+        const total = activeComments.length;
+        const maxPage = Math.ceil(total / maxOnPage);
         let page = +(query.page || '1');
         page = page < 1 ? 1 : page;
         page = page > maxPage ? maxPage : page;
 
-        const comments = user.comments
+        const comments = activeComments
             .sort((a, b) => {
                 return new Date(b.date) - new Date(a.date);
             })
@@ -167,6 +170,7 @@ module.exports = (data, bucketConfig) => {
 
         return {
             comments,
+            total: total,
             currentPage: page,
             prevPage: page - 1,
             nextPage: page + 1,

@@ -523,6 +523,7 @@ describe('User controller tests', () => {
                     'showComment': true,
                     'commentsObject': {
                         'comments': [],
+                        'total': 0,
                         'currentPage': 0,
                         'maxPage': 0,
                         'nextPage': 1,
