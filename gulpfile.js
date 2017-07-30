@@ -33,7 +33,9 @@ gulp.task('pre-test', () => {
 
 gulp.task('tests:unit', ['pre-test'], () => {
     return gulp.src(['./tests/unit/**/*.js', './tests/integration/**/*.js'])
-        .pipe(mocha())
+        .pipe(mocha({
+            timeout: 5000,
+        }))
         .pipe(istanbul.writeReports())
         .once('end', () => {
             // eslint-disable-next-line
