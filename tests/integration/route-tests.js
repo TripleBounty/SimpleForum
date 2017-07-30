@@ -5,6 +5,44 @@ const bucketConfig = require('../../app/config/env-configs/bucket-config');
 
 describe('Route tests', () => {
     let app = null;
+    before((done) => {
+        const defaultuser = {
+            avatar: 'https://s3.eu-central-1.amazonaws.com/simple-forum/DefaultAvatar.png',
+            first_name: 'testuser',
+            last_name: 'testuser',
+            date: '2017-07-09',
+            country: 'Bulgaria',
+            user_name: 'test',
+            // eslint-disable-next-line max-len
+            user_password: '37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578',
+            confirm_password: 'testtest',
+            email: 'aa@abv.bg',
+            contact_no: '+359897856455',
+            comments: [],
+        };
+
+        const country = {
+            'name': 'Bulgaria',
+            'code': 'BG',
+        };
+
+        const { MongoClient } = require('mongodb');
+
+        MongoClient.connect(config.connectionStringTest)
+            .then((db) => {
+                return db.dropDatabase()
+                    .then(() => {
+                        return Promise.all([
+                            db.collection('users').insert(defaultuser),
+                            db.collection('users').insert(country),
+                        ]);
+                    });
+            })
+            .then(() => {
+                done();
+            });
+    });
+
     beforeEach((done) => {
         Promise.resolve()
             .then(() => require('../../db')(config.connectionStringTest))
