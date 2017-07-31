@@ -46,7 +46,7 @@ gulp.task('tests:unit', ['pre-test'], () => {
 gulp.task('test-server-start', () => {
     const config = require('./app/config/env-configs/env-configs');
     const bucketConfig = require('./app/config/env-configs/bucket-config');
-    const port = config.port;
+    const port = 3002;
 
     return Promise.resolve()
         .then(() => require('./db')(config.connectionStringTest))
@@ -70,7 +70,24 @@ gulp.task('init:testdb', () => {
         .then((db) => {
             return db.dropDatabase()
                 .then(() => {
-                    return db.collection('countries').insert(country);
+                    db.collection('countries').insert(country);
+                })
+                .then(() => {
+                    const defaultuser = {
+                        avatar: 'https://s3.eu-central-1.amazonaws.com/simple-forum/DefaultAvatar.png',
+                        first_name: 'testuser',
+                        last_name: 'testuser',
+                        date: '2017-07-09',
+                        country: 'Bulgaria',
+                        user_name: 'test',
+                        // eslint-disable-next-line max-len
+                        user_password: '37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578',
+                        confirm_password: 'testtest',
+                        email: 'aa@abv.bg',
+                        contact_no: '+359897856455',
+                        comments: [],
+                    };
+                    return db.collection('users').insert(defaultuser);
                 });
         });
 });
