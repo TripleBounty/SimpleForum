@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { setupDriver } = require('../utils/setup-driver');
 const utils = require('../utils/ui');
 
-describe('Test', () => {
+describe('Forum tests', () => {
     const userLoggin = {
         username: 'test',
         password: 'testtest',

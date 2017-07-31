@@ -524,10 +524,10 @@ describe('User controller tests', () => {
                     'commentsObject': {
                         'comments': [],
                         'total': 0,
-                        'currentPage': 0,
+                        'currentPage': 1,
                         'maxPage': 0,
-                        'nextPage': 1,
-                        'prevPage': -1,
+                        'nextPage': 2,
+                        'prevPage': 0,
                     },
                 };
 

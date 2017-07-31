@@ -70,12 +70,11 @@ const setValueClear = (selector, value) => {
     return Promise.resolve()
         .then(() => waitFor(selector))
         .then((el) => {
-            el.clear();
-            return Promise.resolve(el);
-        })
-        .then((el) => {
-            el.sendKeys(value);
-            return Promise.resolve(el);
+            el.clear()
+                .then(() => {
+                    el.sendKeys(value);
+                    return Promise.resolve(el);
+                });
         });
 };
 

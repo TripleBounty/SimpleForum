@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { setupDriver } = require('../utils/setup-driver');
 const utils = require('../utils/ui');
 
-describe('Test', () => {
+describe('User tests', () => {
     const user = {
         firstName: 'firstname',
         lastName: 'lastname',
@@ -160,7 +160,6 @@ describe('Test', () => {
                 return utils.click('#personal');
             })
             .then(() => {
-                driver.sleep(1000);
                 // eslint-disable-next-line max-len
                 return utils.setValueClear('#inputFirstName', userUpdate.firstName);
             })
@@ -178,7 +177,7 @@ describe('Test', () => {
                 return utils.setValueClear('#inputMobile', userUpdate.number);
             })
             .then(() => {
-                driver.sleep(1000);
+                driver.sleep(2000);
                 // eslint-disable-next-line max-len
                 return utils.click('#update');
             })
