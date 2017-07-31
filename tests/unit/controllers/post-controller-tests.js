@@ -6,17 +6,17 @@ chai.use(sinonChai);
 
 const { getRequestMock, getResponseMock } = require('../Mocks/req_res');
 const data = {
-    posts:{
+    posts: {
         create() { },
         findById() {
-            return Promise.resolve()
-         },
-         getAllSortedByDate() {
-             return Promise.resolve()
-         },
-         updateLikes() {
+            return Promise.resolve();
+        },
+        getAllSortedByDate() {
+            return Promise.resolve();
+        },
+        updateLikes() {
 
-         },
+        },
     },
     users: {
         create() { },
@@ -26,7 +26,7 @@ const data = {
     },
 };
 const controller = require('../../../controllers/post-controller')(data);
-    
+
 describe('Post controller tests', () => {
     let req;
     let res;
@@ -62,7 +62,7 @@ describe('Post controller tests', () => {
             expect(res.context).to.be.deep.equal(expected);
         });
     });
-    describe('Post Tests', (done) => {
+    describe('Post Tests', () => {
         it('Should call base data findById with id', (done) => {
             const postId = 'MyId';
             req.params = {};
@@ -75,8 +75,8 @@ describe('Post controller tests', () => {
 
             const stubFind = sinon.stub(data.posts, 'findById')
                 .returns(Promise.resolve(post));
-            
-            controller.getPostById(req, res)            
+
+            controller.getPostById(req, res)
                 .then(() => {
                     // eslint-disable-next-line no-unused-expressions
                     expect(stubFind).to.have.been.calledOnce;
@@ -168,11 +168,9 @@ describe('Post controller tests', () => {
                     done(error);
                 });
         });
-
-        // eslint-disable-next-line max-len
-
     });
-    describe('Post Home Tests', (done) => {
+
+    describe('Post Home Tests', () => {
         it('Should call base data getAllSortedByDate', (done) => {
             req.login({ user_name: 'myUserName' });
 
@@ -180,23 +178,26 @@ describe('Post controller tests', () => {
             req.params = {};
             req.params.date = date;
 
-             const posts = [ { _id: 597e0314,
-                            title: 'Des-pa',
-                            content: 'Cito',
-                            date: date,
-                            nodes: 0,
-                            username: 'stoqn',
-                            img: 'https://simple-forum.s3.eu-central-1.amazonaws.com/img_2017_6_30_1501430485018.png',
-                            isDeleted: false,
-                            comments: [] },
-                            ];        
-            
-            const stubGetAll= sinon.stub(data.posts, 'getAllSortedByDate')
+            const posts = [{
+                _id: 597e0314,
+                title: 'Des-pa',
+                content: 'Cito',
+                date: date,
+                nodes: 0,
+                username: 'stoqn',
+                img: 'https://simple-forum.s3.eu-central-1.amazonaws.com/img_2017_6_30_1501430485018.png',
+                isDeleted: false,
+                comments: [],
+            },
+            ];
+
+            const stubGetAll = sinon.stub(data.posts, 'getAllSortedByDate')
                 .returns(Promise.resolve(posts));
 
-            
-            controller.getAll(req, res)            
-                .then((posts) => {
+
+            controller.getAll(req, res)
+                .then(() => {
+                    // eslint-disable-next-line
                     expect(stubGetAll).to.have.been.calledOnce;
                     expect(stubGetAll).to.have.been.calledWith();
                     stubGetAll.restore();
@@ -208,24 +209,26 @@ describe('Post controller tests', () => {
                 });
         });
         it('Should render home template with post found ', (done) => {
-             req.login({ user_name: 'myUserName' });
+            req.login({ user_name: 'myUserName' });
 
             const date = 'Sun Jul 30 2017';
             req.params = {};
             req.params.date = date;
 
-             const posts = [ { _id: 597e0314,
-                            title: 'Des-pa',
-                            content: 'Cito',
-                            date: date,
-                            nodes: 0,
-                            username: 'stoqn',
-                            img: 'https://simple-forum.s3.eu-central-1.amazonaws.com/img_2017_6_30_1501430485018.png',
-                            isDeleted: false,
-                            comments: [] },
-                            ];        
-            
-            const stubGetAll= sinon.stub(data.posts, 'getAllSortedByDate')
+            const posts = [{
+                _id: 597e0314,
+                title: 'Des-pa',
+                content: 'Cito',
+                date: date,
+                nodes: 0,
+                username: 'stoqn',
+                img: 'https://simple-forum.s3.eu-central-1.amazonaws.com/img_2017_6_30_1501430485018.png',
+                isDeleted: false,
+                comments: [],
+            },
+            ];
+
+            const stubGetAll = sinon.stub(data.posts, 'getAllSortedByDate')
                 .returns(Promise.resolve(posts));
 
             controller.getAll(req, res)
@@ -238,10 +241,10 @@ describe('Post controller tests', () => {
                 .catch((error) => {
                     stubGetAll.restore();
                     done(error);
-                });;
+                });
         });
     });
-    describe('Post Create', () => {        
+    describe('Post Create', () => {
         it('should call data posts create', () => {
             req.login({ user_name: 'myUserName' });
             const create = sinon.stub(data.posts, 'create')
@@ -268,15 +271,16 @@ describe('Post controller tests', () => {
                     done(error);
                 });
         });
-        it('should render post-form to redirect to /api/users/login if user is not logged in', (done) => {            
+
+        // eslint-disable-next-line
+        it('should render post-form to redirect to /api/users/login if user is not logged in', (done) => {
             controller.newPost(req, res);
-            expect(res.status().status().redirectUrl).to.be.equal('/api/users/login');
+            expect(res.redirectUrl).to.be.equal('/api/users/login');
             expect(req.isAuthenticated()).to.be.equal(false);
-            done();            
+            done();
         });
     });
-    describe('Post Likes Update should post', () => {        
-
+    describe('Post Likes Update should post', () => {
         it('should render post-form with error', (done) => {
             const create = sinon.stub(data.posts, 'updateLikes')
                 .returns(Promise.resolve());

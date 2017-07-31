@@ -27,7 +27,7 @@ module.exports = (data) => {
     function updateComment(req, res) {
         return data.comments.update(req.body, req.user)
             .then(() => {
-                res.status(200).send();                
+                res.status(200).send();
             })
             .catch((error) => {
                 res.render('comment', { inavalid: error });
@@ -37,7 +37,7 @@ module.exports = (data) => {
     function deleteComment(req, res) {
         return data.comments.delete(req.body, req.user)
             .then(() => {
-                res.status(200).send(); 
+                res.status(200).send();
             })
             .catch((error) => {
                 res.render('comment', { inavalid: error });
@@ -46,8 +46,9 @@ module.exports = (data) => {
 
     function newComment(req, res) {
         if (!req.isAuthenticated()) {
-            res.status(401).redirect('/api/users/login');
-            return;
+            return Promise.resolve(
+                res.status(401).redirect('/api/users/login')
+            );
         }
         const postLink = req.body.message[1];
         return data.comments.create(req.body, req.user, value)

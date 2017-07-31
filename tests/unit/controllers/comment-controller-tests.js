@@ -6,15 +6,19 @@ chai.use(sinonChai);
 
 const { getRequestMock, getResponseMock } = require('../Mocks/req_res');
 const data = {
-    posts:{
-         getAll() {
-             return Promise.resolve()
-         },
+    posts: {
+        getAll() {
+            return Promise.resolve();
+        },
     },
-    comments:{
-        update() {return Promise.resolve()},
-        delete() {},
-        create() {return Promise.resolve()},
+    comments: {
+        update() {
+            return Promise.resolve();
+        },
+        delete() { },
+        create() {
+            return Promise.resolve();
+        },
     },
     users: {
         create() { },
@@ -24,7 +28,7 @@ const data = {
     },
 };
 const controller = require('../../../controllers/comment-controller')(data);
-    
+
 describe('Comment controller tests', () => {
     let req;
     let res;
@@ -69,7 +73,7 @@ describe('Comment controller tests', () => {
                 });
         });
         it('should render comment with error', (done) => {
-           const stubUpdate = sinon.stub(data.comments, 'update')
+            const stubUpdate = sinon.stub(data.comments, 'update')
                 .returns(Promise.reject());
 
             controller.updateComment(req, res)
@@ -102,7 +106,7 @@ describe('Comment controller tests', () => {
                 });
         });
         it('should render comment with error', (done) => {
-           const stubDelete= sinon.stub(data.comments, 'delete')
+            const stubDelete = sinon.stub(data.comments, 'delete')
                 .returns(Promise.reject());
 
             controller.deleteComment(req, res)
@@ -119,11 +123,11 @@ describe('Comment controller tests', () => {
     });
     describe('New Comment Test', () => {
         // eslint-disable-next-line max-len
-        it('should new comment to redirect to /api/users/login if user is not logged in', (done) => {            
+        it('should new comment to redirect to /api/users/login if user is not logged in', (done) => {
             controller.newComment(req, res);
-            expect(res.status().status().redirectUrl).to.be.equal('/api/users/login');
+            expect(res.redirectUrl).to.be.equal('/api/users/login');
             expect(req.isAuthenticated()).to.be.equal(false);
-            done();            
+            done();
         });
         it('should render create comment at forum-post', (done) => {
             req.login({ user_name: 'myUserName' });
@@ -133,7 +137,7 @@ describe('Comment controller tests', () => {
 
             controller.newComment(req, res)
                 .then(() => {
-                    console.log(res);
+                    // eslint-disable-next-line
                     expect(res.redirectUrl).to.be.equal('/forum-post/awsomePost');
                     stubCreate.restore();
                     done();

@@ -44,8 +44,8 @@ module.exports = (data) => {
             isAutenticated = true;
         }
         return data.posts.getAllSortedByDate()
-            .then((posts) => {       
-                res.cookie(value, 'session', { maxAge: 9999 });         
+            .then((posts) => {
+                res.cookie(value, 'session', { maxAge: 9999 });
                 res.render('home', {
                     'user': user,
                     'isAutenticated': isAutenticated,
@@ -79,8 +79,9 @@ module.exports = (data) => {
 
     function newPost(req, res) {
         if (!req.isAuthenticated()) {
-            res.status(401).redirect('/api/users/login');
-            return;
+            return Promise.resolve(
+                res.status(401).redirect('/api/users/login')
+            );
         }
 
         return data.posts.create(req.body, req.user)

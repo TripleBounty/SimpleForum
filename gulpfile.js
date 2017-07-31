@@ -63,7 +63,8 @@ const country = {
     'name': 'Bulgaria',
     'code': 'BG',
 };
-gulp.task('test-server:stop', () => {
+
+gulp.task('init:testdb', () => {
     const config = require('./app/config/env-configs/env-configs');
     return MongoClient.connect(config.connectionStringTest)
         .then((db) => {
@@ -74,8 +75,12 @@ gulp.task('test-server:stop', () => {
         });
 });
 
+gulp.task('test-server:stop', () => {
+    gulp.start('init:testdb');
+});
 
-gulp.task('tests:browser', ['test-server-start'], () => {
+
+gulp.task('tests:browser', ['test-server-start', 'init:testdb'], () => {
     return gulp.src(['./tests/browser/tests/**/*.js'])
         .pipe(mocha({
             timeout: 30000,
