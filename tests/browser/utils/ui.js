@@ -86,9 +86,17 @@ const click = (selector) => {
         });
 };
 
+const enter = (selector) => {
+    return Promise.resolve()
+    .then(() => waitFor(selector))
+        .then((el) => {
+            el.sendKeys(webdriver.Key.RETURN);
+        });
+};
+
 module.exports = {
     setDriver(_driver) {
         driver = _driver;
     },
-    waitFor, getText, getTexts, getSelected, setValue, setValueClear, click,
+    waitFor, getText, getTexts, getSelected, setValue, setValueClear, click, enter,
 };

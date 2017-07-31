@@ -12,6 +12,7 @@ $(document).ready(() => {
             $(element).next().removeClass('visibleHiddnen');
             $(element).next().find('input').attr('name', 'message');
             $(element).next().find('button').attr('formmethod', 'post');
+            $(element).next().find('button').attr('id', 'commentSend');
         }).catch((err) => {
             console.error(err);
         });

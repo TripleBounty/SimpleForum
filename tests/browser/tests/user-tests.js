@@ -108,6 +108,7 @@ describe('User tests', () => {
             })
             .then((prop) => {
                 expect(prop).to.be.deep.equal('Bulgaria');
+                driver.close();
                 done();
             })
             .catch(done);
@@ -133,6 +134,7 @@ describe('User tests', () => {
             })
             .then((username) => {
                 expect(username).to.be.deep.equal('test');
+                driver.close();
                 done();
             })
             .catch(done);
@@ -212,6 +214,7 @@ describe('User tests', () => {
             })
             .then((prop) => {
                 expect(prop).to.be.deep.equal(userUpdate.number);
+                driver.close();
                 done();
             })
             .catch(done);

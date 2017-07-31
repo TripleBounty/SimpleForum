@@ -6,7 +6,7 @@ describe('Forum tests', () => {
     const userLoggin = {
         username: 'test',
         password: 'testtest',
-    }
+    };
 
     const testPost = {
         title: 'Test post title',
@@ -23,6 +23,7 @@ describe('Forum tests', () => {
     it('expect loggin user to be able to create new forum post', (done) => {
         driver.get(appUrl)
             .then(() => {
+                driver.sleep(1000);
                 return utils.click('#log-in > a');
             })
             .then(() => {
@@ -44,6 +45,7 @@ describe('Forum tests', () => {
                 return utils.setValue('#inputPostContent', testPost.content);
             })
             .then(() => {
+                // eslint-disable-next-line max-len
                 return utils.click('#new_post_form > div:nth-child(6) > div > button');
             })
             .then(() => {
@@ -54,16 +56,20 @@ describe('Forum tests', () => {
                  expect(title).to.be.deep.equal(testPost.title.toUpperCase());
             })
             .then(() => {
+                // eslint-disable-next-line max-len
                 return utils.getText('body > div > div > div > div > p:nth-child(4)');
             })
             .then((content) => {
                 expect(content).to.be.deep.equal(testPost.content);
             })
             .then(() => {
+                // eslint-disable-next-line max-len
                 return utils.getText('body > div > div > div > div > p.text-right > a');
             })
             .then((username) => {
+                // eslint-disable-next-line max-len
                 expect(username).to.be.deep.equal(userLoggin.username.toUpperCase());
+                driver.close();
                 done();
             })
             .catch(done);
