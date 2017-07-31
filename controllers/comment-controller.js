@@ -18,14 +18,14 @@ function s4() {
 
 module.exports = (data) => {
     function showComment(req, res) {
-        data.posts.getAll()
+        return data.posts.getAll()
             .then(() => {
                 res.status(200).send();
             });
     }
 
     function updateComment(req, res) {
-        data.comments.update(req.body, req.user)
+        return data.comments.update(req.body, req.user)
             .then(() => {
                 res.status(200).send();                
             })
@@ -35,7 +35,7 @@ module.exports = (data) => {
     }
 
     function deleteComment(req, res) {
-        data.comments.delete(req.body, req.user)
+        return data.comments.delete(req.body, req.user)
             .then(() => {
                 res.status(200).send(); 
             })
@@ -50,7 +50,7 @@ module.exports = (data) => {
             return;
         }
         const postLink = req.body.message[1];
-        data.comments.create(req.body, req.user, value)
+        return data.comments.create(req.body, req.user, value)
             .then(() => {
                 res.redirect('/forum-post/' + postLink);
             })
