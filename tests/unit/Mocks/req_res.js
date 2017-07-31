@@ -5,7 +5,9 @@ const getRequestMock = (options = {}) => {
         post: '',
         postId: '',
         node:'',
-        postType:'', 
+        postType:'',
+        postLink:'',
+        body: {message:['','','','']}, 
         _isAuthenticated: false,
         isAuthenticated() {
             return this._isAuthenticated;
