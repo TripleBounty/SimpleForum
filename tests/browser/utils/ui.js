@@ -61,7 +61,22 @@ const getSelected = (selector) => {
 const setValue = (selector, value) => {
     return Promise.resolve()
         .then(() => waitFor(selector))
-        .then((el) => el.sendKeys(value));
+        .then((el) => {
+            el.sendKeys(value);
+        });
+};
+
+const setValueClear = (selector, value) => {
+    return Promise.resolve()
+        .then(() => waitFor(selector))
+        .then((el) => {
+            el.clear();
+            return Promise.resolve(el);
+        })
+        .then((el) => {
+            el.sendKeys(value);
+            return Promise.resolve(el);
+        });
 };
 
 const click = (selector) => {
@@ -76,5 +91,5 @@ module.exports = {
     setDriver(_driver) {
         driver = _driver;
     },
-    waitFor, getText, getTexts, getSelected, setValue, click,
+    waitFor, getText, getTexts, getSelected, setValue, setValueClear, click,
 };

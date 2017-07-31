@@ -159,8 +159,8 @@ module.exports = (data, bucketConfig) => {
         const total = activeComments.length;
         const maxPage = Math.ceil(total / maxOnPage);
         let page = +(query.page || '1');
-        page = page < 1 ? 1 : page;
         page = page > maxPage ? maxPage : page;
+        page = page < 1 ? 1 : page;
 
         const comments = activeComments
             .sort((a, b) => {
