@@ -17,7 +17,7 @@ class Posts extends BaseData {
         if (!this._isModelValid(model, 'create')) {
             return Promise.reject('Invalid input data');
         }
-        
+
         const dbModel = this.ModelClass.getDataBaseModel(model);
 
         dbModel.nodes = 0;
