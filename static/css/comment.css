@@ -11,3 +11,7 @@
     visibility: hidden;
     display: none;
 }
+.form-control.message
+{
+    max-width: 200px;
+}

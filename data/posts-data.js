@@ -28,9 +28,9 @@ class Posts extends BaseData {
 
         return this.findPostByTitle(model.title)
             .then((post) => {
-                if (post) {
-                    return Promise.reject('Forum post already exist');
-                }
+                // if (post) {
+                //     return Promise.reject('Forum post already exist');
+                // }
                 return this.collection.insert(dbModel);
             });
     }

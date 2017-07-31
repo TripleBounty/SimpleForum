@@ -6,7 +6,7 @@ describe('Forum tests', () => {
     const userLoggin = {
         username: 'test',
         password: 'testtest',
-    }
+    };
 
     const testPost = {
         title: 'Test post title',
@@ -23,6 +23,7 @@ describe('Forum tests', () => {
     it('expect loggin user to be able to create new forum post', (done) => {
         driver.get(appUrl)
             .then(() => {
+                driver.sleep(1000);
                 return utils.click('#log-in > a');
             })
             .then(() => {
@@ -68,6 +69,9 @@ describe('Forum tests', () => {
             .then((username) => {
                 expect(username).to.be
                     .deep.equal(userLoggin.username.toUpperCase());
+                expect(username).to.be
+                    .deep.equal(userLoggin.username.toUpperCase());
+                driver.close();
                 done();
             })
             .catch(done);
