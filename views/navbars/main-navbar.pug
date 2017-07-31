@@ -18,12 +18,12 @@ mixin main-navbar(isAutenticated, user)
                             span.glyphicon.glyphicon-home(aria-hidden='true')
                     if !isAutenticated
                         li
-                            a(href='/api/users/register')
+                            a#register(href='/api/users/register')
                                 | Register User 
                                 span.sr-only (current)
                     if isAutenticated
                         li
-                            a(href='/new-forum-post')
+                            a#new-forum-post(href='/new-forum-post')
                                 | New Post
                                 span.sr-only (current)
                         li

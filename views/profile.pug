@@ -11,22 +11,22 @@ block body
           .profile-info-row
             .profile-info-name  Username 
             .profile-info-value
-              span
+              span#user_name
                 =user_profile.user_name
           .profile-info-row
             .profile-info-name  Location 
             .profile-info-value
-              span
+              span#country
                 =user_profile.country
           .profile-info-row
             .profile-info-name  First Name 
             .profile-info-value
-              span
+              span#first_name
                 =user_profile.first_name
           .profile-info-row
             .profile-info-name  Last Name 
             .profile-info-value
-              span
+              span#last_name
                 =user_profile.last_name
           .profile-info-row
             .profile-info-name  Birth Date 
@@ -36,12 +36,12 @@ block body
           .profile-info-row
             .profile-info-name  Email 
             .profile-info-value
-              span
+              span#email
                 =user_profile.email
           .profile-info-row
             .profile-info-name  Contact No. 
             .profile-info-value
-              span
+              span#number
                 =user_profile.contact_no
   if showComment
     .container.well#comment-container

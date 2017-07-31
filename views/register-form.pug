@@ -67,7 +67,7 @@ block body
                 .input-group
                   span.input-group-addon
                     i.glyphicon.glyphicon-list
-                  select.form-control.selectpicker(name='country')
+                  select#countries.form-control.selectpicker(name='country')
                     option(value='') Country
                     each country in countries
                       option #{country.name}
