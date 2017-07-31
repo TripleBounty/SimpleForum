@@ -14,7 +14,7 @@ describe('Test', () => {
     };
 
 
-    const appUrl = 'http://localhost:3000';
+    const appUrl = 'http://localhost:3002';
     let driver = null;
     beforeEach(() => {
         driver = setupDriver('chrome');
@@ -96,6 +96,30 @@ describe('Test', () => {
             })
             .then((prop) => {
                 expect(prop).to.be.deep.equal('Bulgaria');
+                done();
+            })
+            .catch(done);
+    });
+
+    it('expect Login to log user if exist', (done) => {
+        driver.get(appUrl)
+            .then(() => {
+                return utils.click('#log-in > a');
+            })
+            .then(() => {
+                return utils.setValue('#inputUsername', 'test');
+            })
+            .then(() => {
+                return utils.setValue('#inputPassword', 'testtest');
+            })
+            .then(() => {
+                return utils.click('#submit');
+            })
+            .then(() => {
+                return utils.getText(' #user-name-nav > a');
+            })
+            .then((username) => {
+                expect(username).to.be.deep.equal('test');
                 done();
             })
             .catch(done);
