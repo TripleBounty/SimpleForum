@@ -26,7 +26,7 @@ $(document).ready(() => {
                     },
                     notEmpty: {
                         // eslint-disable-next-line max-len
-                        message: 'Your post should contain at least 128 characters',
+                        message: 'Your post should contain at least 3 characters',
                     },
                 },
             },

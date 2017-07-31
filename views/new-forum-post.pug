@@ -1,7 +1,7 @@
 extends shared/_master
 block scripts
     script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js')
-
+    link(rel='stylesheet', href='/static/css/new-forum-post.css')
 block body
     .container
         form#new_post_form.well.form-horizontal(action='', method='post')
