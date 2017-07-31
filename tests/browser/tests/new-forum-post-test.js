@@ -44,6 +44,7 @@ describe('Forum tests', () => {
                 return utils.setValue('#inputPostContent', testPost.content);
             })
             .then(() => {
+                // eslint-disable-next-line max-len
                 return utils.click('#new_post_form > div:nth-child(6) > div > button');
             })
             .then(() => {
@@ -54,16 +55,19 @@ describe('Forum tests', () => {
                  expect(title).to.be.deep.equal(testPost.title.toUpperCase());
             })
             .then(() => {
+                // eslint-disable-next-line max-len
                 return utils.getText('body > div > div > div > div > p:nth-child(4)');
             })
             .then((content) => {
                 expect(content).to.be.deep.equal(testPost.content);
             })
             .then(() => {
+                // eslint-disable-next-line max-len
                 return utils.getText('body > div > div > div > div > p.text-right > a');
             })
             .then((username) => {
-                expect(username).to.be.deep.equal(userLoggin.username.toUpperCase());
+                expect(username).to.be
+                    .deep.equal(userLoggin.username.toUpperCase());
                 done();
             })
             .catch(done);

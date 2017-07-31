@@ -14,12 +14,10 @@ class Posts extends BaseData {
     }
 
     create(model, user) {
-        if (this._isModelValid) {
-            const error = this._isModelValid(model);
-            if (error !== 'no') {
-                return Promise.reject(error);
-            }
+        if (!this._isModelValid(model, 'create')) {
+            return Promise.reject('Invalid input data');
         }
+        
         const dbModel = this.ModelClass.getDataBaseModel(model);
 
         dbModel.nodes = 0;
@@ -37,19 +35,19 @@ class Posts extends BaseData {
             });
     }
 
-    addCommentId(parentId, id) {
-        this.collection.findById(parentId)
-            .then((post) => {
-                if (post) {
-                    this.collection.update({
-                        _id: new ObjectID(parentId),
-                    }, {
-                            $push: { comments: new ObjectID(id) },
-                        });
-                }
-            });
-        return this;
-    }
+    // addCommentId(parentId, id) {
+    //     this.collection.findById(parentId)
+    //         .then((post) => {
+    //             if (post) {
+    //                 this.collection.update({
+    //                     _id: new ObjectID(parentId),
+    //                 }, {
+    //                         $push: { comments: new ObjectID(id) },
+    //                     });
+    //             }
+    //         });
+    //     return this;
+    // }
 
     _isModelValid(model) {
         return Post.validate(model);
@@ -63,7 +61,7 @@ class Posts extends BaseData {
     updateLikes(id, like) {
         return this.findById(id)
             .then((post) => {
-                this.collection.update({
+                return this.collection.update({
                     _id: new ObjectID(id),
                 }, {
                         $set: {

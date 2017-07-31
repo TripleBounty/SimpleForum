@@ -3,7 +3,7 @@ const CryptoJS = require('crypto-js');
 
 const UserData = require('../../../data/users-data');
 
-describe('Users data tests', () => {
+describe('Post data tests', () => {
     let users;
     let items;
     let collection;
