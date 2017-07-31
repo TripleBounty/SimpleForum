@@ -1,3 +1,6 @@
-.input-group .form-control {
+.inputGroupContainer {
     width: 30em;
+}
+.input-group .form-control{
+    width: 25em;
 }
