@@ -13,6 +13,16 @@ describe('Test', () => {
         number: '+355888889999',
     };
 
+    const userUpdate = {
+        firstName: 'ufirstname',
+        lastName: 'ulastname',
+        date: '06-06-2017',
+        username: 'test',
+        password: 'aabbaabb',
+        email: 'uu@abv.bg',
+        number: '+355888889980',
+    };
+
 
     const appUrl = 'http://localhost:3002';
     let driver = null;
@@ -58,10 +68,12 @@ describe('Test', () => {
                 return utils.click('#contact_form > fieldset > div.form-group > div > button');
             })
             .then(() => {
+                driver.sleep(1000);
                 // eslint-disable-next-line max-len
                 return utils.click('#user-name-nav > a');
             })
             .then(() => {
+                driver.sleep(1000);
                 return utils.getText('#user_name');
             })
             .then((prop) => {
@@ -116,10 +128,91 @@ describe('Test', () => {
                 return utils.click('#submit');
             })
             .then(() => {
+                driver.sleep(1000);
                 return utils.getText(' #user-name-nav > a');
             })
             .then((username) => {
                 expect(username).to.be.deep.equal('test');
+                done();
+            })
+            .catch(done);
+    });
+
+    it('expect update to log user if exist and update data', (done) => {
+        driver.get(appUrl)
+            .then(() => {
+                return utils.click('#log-in > a');
+            })
+            .then(() => {
+                return utils.setValue('#inputUsername', 'test');
+            })
+            .then(() => {
+                return utils.setValue('#inputPassword', 'testtest');
+            })
+            .then(() => {
+                return utils.click('#submit');
+            })
+            .then(() => {
+                driver.sleep(1000);
+                return utils.click('#settings');
+            })
+            .then(() => {
+                return utils.click('#personal');
+            })
+            .then(() => {
+                driver.sleep(1000);
+                // eslint-disable-next-line max-len
+                return utils.setValueClear('#inputFirstName', userUpdate.firstName);
+            })
+            .then(() => {
+                // eslint-disable-next-line max-len
+                return utils.setValueClear('#inputLastName', userUpdate.lastName);
+            })
+            .then(() => {
+                return utils.setValue('#inputDate', userUpdate.date);
+            })
+            .then(() => {
+                return utils.setValueClear('#inputEmail', userUpdate.email);
+            })
+            .then(() => {
+                return utils.setValueClear('#inputMobile', userUpdate.number);
+            })
+            .then(() => {
+                driver.sleep(1000);
+                // eslint-disable-next-line max-len
+                return utils.click('#update');
+            })
+            .then(() => {
+                driver.sleep(1000);
+                return utils.getText('#user_name');
+            })
+            .then((prop) => {
+                expect(prop).to.be.deep.equal(userUpdate.username);
+            })
+            .then(() => {
+                return utils.getText('#first_name');
+            })
+            .then((prop) => {
+                expect(prop).to.be.deep.equal(userUpdate.firstName);
+            })
+            .then(() => {
+                return utils.getText('#last_name');
+            })
+            .then((prop) => {
+                expect(prop).to.be.deep.equal(userUpdate.lastName);
+            })
+            .then(() => {
+                return utils.getText('#email');
+            })
+            .then((prop) => {
+                expect(prop).to.be.deep.equal(userUpdate.email);
+            })
+            .then(() => {
+                driver.sleep(3000);
+                return utils.getText('#number');
+            })
+            .then((prop) => {
+                expect(prop).to.be.deep.equal(userUpdate.number);
                 done();
             })
             .catch(done);
